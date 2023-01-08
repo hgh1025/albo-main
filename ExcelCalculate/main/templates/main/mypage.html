@@ -1,0 +1,209 @@
+<!-- 개인프로젝트 시작 12/20 마이페이지 만들기 -->
+<!DOCTYPE html>
+<html lang="ko">
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+<!-- Additional CSS Files -->
+<link rel="stylesheet" type="text/css" href="{%static 'assets/css/bootstrap.min.css'%}">
+
+<link rel="stylesheet" type="text/css" href="{%static 'assets/css/font-awesome.css' %}">
+
+<link rel="stylesheet" href="{%static 'assets/css/templatemo-klassy-cafe.css' %}">
+
+<link rel="stylesheet" href="{%static 'assets/css/owl-carousel.css' %}">
+
+<link rel="stylesheet" href="{%static 'assets/css/lightbox.css' %}">
+  <!-- navbar start -->
+  <link rel="stylesheet" href="{%static 'css/style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/221ae2e8b7.js" crossorigin="anonymous"></script>
+  <script src="{%static 'js/main.js' %}" defer></script>
+  <!-- navbar end-->
+<style>
+   /* 마이페이지 navbar start */
+   .menu {
+      width: 600px;
+      overflow: hidden;
+      margin:0px;
+      padding:0px;
+      vertical-align:middle;
+    }
+
+    .menu>li {
+      width: 30%;
+     
+      text-align: center;
+      line-height: 30px;
+      /* background-color: #f4f4f4; */
+
+    }
+
+    /* .menu a {
+      color: rgb(12, 12, 12);
+    } */
+
+    .submenu>li {
+      line-height: 30px;
+      padding:0px;
+      margin:0px;
+    
+    }
+
+    .submenu {
+      height: 0;
+      right:2px;
+      /*ul의 높이를 안보이게 처리*/
+     
+    }
+
+    .menu>li:hover {
+      
+      transition-duration: 0.5s;
+    }
+
+    .menu>li:hover .submenu {
+      height: 80px;
+      /*서브메뉴 li한개의 높이 50*5*/
+      transition-duration: 1s;
+     
+    }
+
+.container{
+  border : 1px solid rgb(246, 238, 238);
+  background-color: rgb(246, 238, 238);
+  width: 5000px;
+  /* height: 500px; */
+  padding:50px;
+  margin-top: 100px
+}
+.container2{
+  border : 1px solid white;
+  background-color:  white;
+  margin-left:150px;
+  margin-right:150px;
+  padding:auto;
+}
+.user{
+    margin: 10px 15px 30px 255px;
+    
+}
+.item {
+    border: 1px solid gray;
+    border-right : none;
+    border-left: none;
+    margin: 0px 15px 10px 15px;
+  
+    padding : 10px;
+    display: flex;
+ }
+ .item_name ,.item_price{
+    flex-direction: row;
+ }
+ .container .item li{
+    position:relative;
+    right:-25px;
+    bottom:10px;
+    flex-direction: row;
+ }
+
+
+</style>
+     <!-- navbar Start-->
+  <nav class="navbar">
+    <div class="navbar__logo">
+      <i class="fa-solid fa-leaf"></i>
+      <a href="{%url 'main_index' %}">Albo Market</a>
+    </div>
+
+    <ul class="navbar__menu">
+      <li><a href="{%url 'main_index' %}">홈</a></li>
+      <li><a href="{%url 'main_signup' %}">회원가입</a></li>
+      <li><a href="{%url 'main_signin' %}">로그인</a></li>
+      <li><a href="{%url 'main_logout' %}">로그아웃</a></li>
+      <li><a href="{%url 'main_upload' %}">사진업로드</a></li>
+      <ul class="menu">
+        <li>
+          <a href="#">마이페이지</a>
+          <ul class="submenu">
+            
+            <li><a class="dropdown-item" href="{%url 'main_uppass'%}">비밀번호 변경</a></li>
+            <li><a class="dropdown-item" href="{% url 'user_remove' %}">회원탈퇴</a></li>
+
+          </ul>
+        </li>
+      </ul>
+    </ul>
+    
+    
+
+    </ul>
+
+    <ul class="navbar__icons">
+   
+
+      <li><i class="fa-brands fa-twitter"></i></li>
+      <li><i class="fa-brands fa-facebook"></i></li>
+      <li><i class="fa-brands fa-instagram"></i></li>
+    </ul>
+
+    <a href="#" class="navbar__toggleBtn">
+      <i class="fa-solid fa-bars"></i>
+    </a>
+
+  </nav>
+  <!-- navbar End -->
+</head>
+<body>
+<div class="container">
+  <div class="container2">
+    {% for user in users %}
+    <div class="user">
+        <ul>
+            <li>이름:{{user.user_name}}</li>
+            <li>이메일:{{user.user_email}}</li>
+        </ul>
+    </div>
+    {% endfor %}
+    <form action="" method="POST">{% csrf_token %}
+ 
+    {% for item in items %}
+    
+    <div class="item">
+        
+    <div class="item_img">
+        {% if item.item_img %}
+        <a href="{{item.get_absolute_url}}" target="_blank">
+        <img src="{{ item.item_img.url }}" alt="" width='30%'>
+      
+        <br>
+        {% endif %}
+    </div>
+    
+    <div class="item_name">
+      <li><i class="fa-solid fa-seedling"></i>&nbsp{{item.item_name}}&nbsp<i class="fa-solid fa-seedling"></i></li>  
+    </div>
+
+    <div class="item_price">
+        <li><i class="fa-solid fa-won-sign"></i>&nbsp{{item.item_price}}</li>
+    </div>
+    <p class="myButton" style="font-size: 12px;"><i> &nbsp{{item.trade_status}} </i></p>
+    </div>
+
+    {% endfor %}
+    
+</form>
+</div>
+</div>
+ <!-- Bootstrap -->
+ <script src="{%static 'assets/js/popper.js' %}"></script>
+ <script src="{%static 'assets/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

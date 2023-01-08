@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% load static %}
+
+<head>
+
+  <title>Albo Market</title>
+  <meta charset="utf-8">
+  <!-- Boot strap -->
+  <!-- 합쳐지고 최소화된 최신 CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <!-- 부가적인 테마 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+  <!-- 폰트 start -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" type="text/css" href="{%static 'assets/css/bootstrap.min.css'%}">
+
+  <link rel="stylesheet" type="text/css" href="{%static 'assets/css/font-awesome.css' %}">
+
+  <link rel="stylesheet" href="{%static 'assets/css/templatemo-klassy-cafe.css' %}">
+
+  <link rel="stylesheet" href="{%static 'assets/css/owl-carousel.css' %}">
+
+  <link rel="stylesheet" href="{%static 'assets/css/lightbox.css' %}">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- navbar start -->
+  <link rel="stylesheet" href="{%static 'css/style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/221ae2e8b7.js" crossorigin="anonymous"></script>
+  <script src="{%static 'js/main.js' %}" defer></script>
+  <!-- navbar end-->
+  <style>
+    /* ENABLING AUTO SCROLL */
+
+   
+
+
+    #top .left-content {
+      background-image: url("{%static 'img/KakaoTalk_20221215_105156732.png' %}");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding-left: 7px;
+    }
+
+    #top .item {
+      position: relative;
+      width: 50%;
+      height: 100%;
+      padding-right: 137px;
+    }
+
+    .main-white-button a {
+      font-size: 13px;
+      color: #7bb545;
+      background-color: #fff;
+      padding: 12px 25px;
+      display: inline-block;
+      border-radius: 3px;
+      font-weight: 600;
+      transition: all .3s;
+    }
+
+    /* .Modern-Slider .PrevArrow {
+      position: absolute;
+
+      background-color: #151515;
+      ;
+    } */
+
+    .Modern-Slider .item .img-fill {
+      height: 100%;
+      max-height: 700px;
+      background: rgb(255, 255, 255);
+    }
+
+    /* 이미지 슬라이더 start */
+    .wrap {
+      display: flex;
+      margin: 15px;
+      height: auto;
+      width: 90%;
+      place-items: center;
+      position: relative;
+      animation: scroll 40s linear infinite;
+      perspective: 100px;
+    }
+
+    .col-xs-3 {
+      display: flex;
+      width: calc(250px * 18);
+      padding: 100px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      margin: 10px;
+      perspective: 100px;
+
+    }
+
+    .wrap:hover {
+      animation-play-state: paused;
+    }
+
+    .col-xs-4 {
+
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      perspective: 100px;
+
+    }
+
+    .wrap img {
+      width: auto;
+      transition: transform 1s;
+    }
+
+    .wrap img:hover {
+      transform: translateZ(20px);
+    }
+
+    /* image hover effect start */
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(calc(-250px * 9));
+      }
+    }
+
+    /* image hover effect end */
+    /* 이미지 슬라이더 end */
+
+    /* GRADIENT SHADOWS */
+    /* .wrap::before,
+    .wrap::after{
+      background: linear-gradient(to right, rgba(255,255,255,1) 0%,
+      rgba(255,255,255,0) 100%);
+      content: '';
+      height:100%;
+      position:absolute;
+      width: 15%;
+      z-index: 2;
+    }
+    .wrap::before{
+      left:0;
+      top:0;
+    }
+    .wrap::after{
+      right:0;
+      top: 0;
+      transform: rotateZ(180deg);
+    } */
+    /* GRADIENT SHADOWS end*/
+
+
+
+
+    /* 가격순, 등록순 ... start */
+    .list_control {
+      display: flex;
+      margin-top: 25px;
+      margin-left: 25px;
+    }
+
+    .list_control li {
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .list_control li a .on {
+      /* border-left: 1px solid #a7c520; */
+      border: 1px solid #a7c520;
+    }
+
+    .list_control li a:hover {
+      background: #a7c520;
+      color: #fff !important;
+      border-radius: 0 5px 0 0
+    }
+
+    .list_control li a {
+      font-weight: bold;
+      display: block;
+
+      padding: 8px 20px;
+      border: 1px solid #a7c520;
+    }
+
+    .list_control #view {
+      margin-left: 1500px;
+      background-color: #a7c520;
+
+    }
+
+    .Modern-Slider .PrevArrow,
+    .Modern-Slider .nextArrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-15px);
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: #131212;
+      border: 0 none;
+      line-height: 44px;
+      border-radius: 50%;
+      text-align: center;
+      color: #FFF;
+      z-index: 5;
+      outline: none;
+      opacity: 0.3;
+      transition: all .3s;
+    }
+
+    /* 가격순, 등록순 ... start */
+  </style>
+
+  <!-- navbar Start-->
+  <nav class="navbar">
+
+    <div class="navbar__logo">
+      <i class="fa-solid fa-leaf"></i>
+      <a style="color: #000000;" href="{%url 'main_index' %}">Albo Market</a>
+    </div>
+
+    <ul class="navbar__menu">
+      <li><a style="color: #000000;" href="{%url 'main_index' %}">홈</a></li>
+
+      <li><a style="color: #000000;" href="{%url 'main_signup' %}">회원가입</a></li>
+      <li><a style="color: #000000;" href="{%url 'main_signin' %}">로그인</a></li>
+      <li><a style="color: #000000;" href="{%url 'main_logout' %}">로그아웃</a></li>
+      <li><a style="color: #000000;" href="upload">사진업로드</a></li>
+      {% if login_user == User.user_name %}
+      <li><a style="color: #000000;" href="{%url 'main_mypage' %}">마이페이지</a></li>
+      
+      {% endif %}
+    </ul>
+
+    <ul class="navbar__icons">
+      <li><i class="fa-brands fa-twitter"></i></li>
+      <li><i class="fa-brands fa-facebook"></i></li>
+      <li><i class="fa-brands fa-instagram"></i></li>
+    </ul>
+
+    <!-- <a href="#" class="navbar__toogleBtn">
+    <i class="fa-solid fa-bars"></i>
+  </a> -->
+
+  </nav>
+  <!-- navbar End -->
+
+</head>
+
+
+
+<body>
+
+
+
+
+
+  <div id="top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-4">
+          <!-- width="1200px" height="900px" -->
+
+
+          <div class="left-content">
+            <div class="inner-content">
+              <h4 color=black;>Albo Market</h4>
+              <h6>THE BEST Market</h6>
+              <div class="main-white-button scroll-to-section">
+                <a href="">View Chart</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-8">
+          <div class="main-banner header-text">
+            <div class="Modern-Slider">
+
+              <!-- Item -->
+              <div class="item">
+                <div class="img-fill">
+
+                  {% autoescape off %}
+
+                  {{ plot_div }}
+                  {% endautoescape %}
+                  <!-- <img src="{%static 'assets/images/slide-01.jpg' %}" alt=""> -->
+
+                </div>
+              </div>
+              <!-- // Item -->
+              <!-- Item -->
+              <div class="item">
+                <div class="img-fill">
+
+                  {% autoescape off %}
+                  {{ fig_div }}
+                  {% endautoescape %}
+
+                  <!-- <img src="{%static 'assets/images/slide-02.jpg' %}" alt=""> -->
+                </div>
+              </div>
+              <!-- // Item -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Main Banner Area End ***** -->
+  <div class="fl">
+    <ul class="list_control">
+      <li>
+        <a href="" class="on">신상품순</a>
+      </li>
+      <li>
+        <a href="" class="on">낮은가격순</a>
+      </li>
+      <li>
+        <a href="" class="on">높은가격순</a>
+      </li>
+      <li>
+        <a href="{% url 'main_posting' %}" class="on" id="view">전체보기</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 이미지 삽입 -->
+  <div class="wrap">
+    {% for item in items %}
+
+    <div class="col-xs-3">
+      <div class="col-xs-4">
+        <form action="posting/new_post" method="POST">{% csrf_token %}
+
+          {% if item.item_img %}
+          <a href="{{item.get_absolute_url}}" target="_blank">
+            <img src="{{ item.item_img.url }}" alt="">
+
+            <br>
+            {% endif %}
+
+            <li>
+              <i class="fa-solid fa-seedling"></i>&nbsp{{item.item_name}}&nbsp<i class="fa-solid fa-seedling"></i>
+            </li>
+
+            <li><i class="fa-solid fa-won-sign"></i>&nbsp{{item.item_price}}</li>
+            <p><i class="fa-regular fa-user"></i> &nbsp{{item.user_name}}</p>
+            <p class="myButton" style="font-size: 12px;"><i> &nbsp{{item.trade_status}} </i></p>
+
+          </a>
+
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+
+
+
+  <!-- jQuery -->
+  <script src="{%static 'assets/js/jquery-2.1.0.min.js' %}"></script>
+
+  <!-- Bootstrap -->
+  <script src="{%static 'assets/js/popper.js' %}"></script>
+  <script src="{%static 'assets/js/bootstrap.min.js' %}"></script>
+
+  <!-- Plugins -->
+  <script src="{%static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{%static 'assets/js/accordions.js' %}"></script>
+  <script src="{%static 'assets/js/datepicker.js'%}"></script>
+  <script src="{%static 'assets/js/scrollreveal.min.js'%}"></script>
+  <script src="{%static 'assets/js/waypoints.min.js'%}"></script>
+  <script src="{%static 'assets/js/jquery.counterup.min.js'%}"></script>
+  <script src="{%static 'assets/js/imgfix.min.js'%}"></script>
+  <script src="{%static 'assets/js/slick.js'%}"></script>
+  <script src="{%static 'assets/js/lightbox.js' %}"></script>
+  <script src="{%static 'assets/js/isotope.js' %}"></script>
+
+  <!-- Global Init -->
+  <script src="{%static 'assets/js/custom.js' %}"></script>
+  <script>
+
+    $(function () {
+      var selectedClass = "";
+      $("p").click(function () {
+        selectedClass = $(this).attr("data-rel");
+        $("#portfolio").fadeTo(50, 0.1);
+        $("#portfolio div").not("." + selectedClass).fadeOut();
+        setTimeout(function () {
+          $("." + selectedClass).fadeIn();
+          $("#portfolio").fadeTo(50, 1);
+        }, 500);
+
+      });
+    });
+
+  </script>
+</body>
+
+</html>

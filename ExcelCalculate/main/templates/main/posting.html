@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% load static %}
+
+<head>
+  <title>게시글!</title>
+  <meta charset="utf-8">
+  <!-- Boot strap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+  
+   <!-- 폰트 start -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" type="text/css" href="{%static 'assets/css/bootstrap.min.css'%}">
+
+  <link rel="stylesheet" type="text/css" href="{%static 'assets/css/font-awesome.css' %}">
+
+  <link rel="stylesheet" href="{%static 'assets/css/templatemo-klassy-cafe.css' %}">
+
+  <link rel="stylesheet" href="{%static 'assets/css/owl-carousel.css' %}">
+
+  <link rel="stylesheet" href="{%static 'assets/css/lightbox.css' %}">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- navbar start -->
+  <link rel="stylesheet" href="{%static 'css/style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/221ae2e8b7.js" crossorigin="anonymous"></script>
+  <script src="{%static 'js/main.js' %}" defer></script>
+  <!-- navbar end-->
+  <style>
+    /* paging start */
+  
+    .paging{
+      text-align: center; 
+      font-size: 1;
+      position: absolute;
+      margin-bottom: 15px;
+      bottom: -180px;
+      right: 45%;
+      padding-bottom: 15px;
+    }
+
+    .paging li{ 
+      display:inline-block;
+      vertical-align:middle;
+    }
+    .paging li a{display:block; width:32px; height:32px;line-height: 32px;color:#898786; }
+    .paging .on:hover,
+    .paging li a:hover{
+      color:#ff5a20; text-decoration:underline;
+    }
+   
+    .paging li.prev a,
+    .paging li.next a{
+     border:1px solid #ebeae9; color:black; 
+    }
+    .paging li.prev a {margin-right:23px;}
+    .paging li.next a {margin-left:23px;}
+    
+    /* 가격순, 등록순 ... start */
+    .list_control {
+      display: flex;
+      margin-top: 25px;
+      margin-left: 25px;
+    }
+
+    .list_control li {
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .list_control li a .on {
+      /* border-left: 1px solid #a7c520; */
+      border: 1px solid #a7c520;
+    }
+
+    .list_control li a:hover {
+      background: #a7c520;
+      color: #fff !important;
+      border-radius: 0 5px 0 0
+    }
+
+    .list_control li a {
+      font-weight: bold;
+      display: block;
+
+      padding: 8px 20px;
+      border: 1px solid #a7c520;
+    }
+
+    .list_control #view {
+      margin-left: 1500px;
+      background-color:#a7c520;
+    }
+
+    /* 가격순, 등록순 ... end */
+
+    .wrap .col-xs-4{
+      padding:50px 0px 10px 170px;
+    }
+    
+
+  </style>
+  <!-- navbar Start-->
+  <nav class="navbar">
+    <div class="navbar__logo">
+      <i class="fa-solid fa-leaf"></i>
+      <a href="{%url 'main_index' %}">Albo Market</a>
+    </div>
+
+    <ul class="navbar__menu">
+      <li><a href="{%url 'main_index' %}">홈</a></li>
+
+      <li><a href="{%url 'main_signup' %}">회원가입</a></li>
+      <li><a href="{%url 'main_signin' %}">로그인</a></li>
+      <li><a href="{%url 'main_logout' %}">로그아웃</a></li>
+      <li><a href="{%url 'main_upload' %}">사진업로드</a></li>
+      {% if login_user == User.user_name %}
+      <li><a href="{%url 'main_mypage' %}">마이페이지</a></li>
+      <li><a href="{% url 'user_remove' %}">회원탈퇴</a></li>
+      {% endif %}
+    </ul>
+
+    <ul class="navbar__icons">
+      <li><i class="fa-brands fa-twitter"></i></li>
+      <li><i class="fa-brands fa-facebook"></i></li>
+      <li><i class="fa-brands fa-instagram"></i></li>
+    </ul>
+
+    <a href="#" class="navbar__toggleBtn">
+      <i class="fa-solid fa-bars"></i>
+    </a>
+</nav>
+       
+
+</head>
+
+<body>
+ 
+
+  <div class="fl">
+    <ul class="list_control">
+      <li>
+        <a href="" class="on">신상품순</a>
+      </li>
+      <li>
+        <a href="" class="on">낮은가격순</a>
+      </li>
+      <li>
+        <a href="" class="on">높은가격순</a>
+      </li>
+      <li>
+        <a href="{% url 'main_index' %}" class="on" id="view">한줄로보기</a>
+      </li>
+    </ul>
+  </div>
+ 
+
+ 
+
+
+  <!-- 이미지 삽입 -->
+  <div class="wrap">
+    {% for item in items %}
+
+    <div class="col-xs-3">
+      <div class="col-xs-4">
+        <form action="posting/new_post" method="POST">{% csrf_token %}
+
+          {% if item.item_img %}
+          <a href="{{item.get_absolute_url}}" target="_blank">
+            <img src="{{ item.item_img.url }}" alt="">
+
+            <br>
+            {% endif %}
+
+            <li>
+              <i class="fa-solid fa-seedling"></i>&nbsp{{item.item_name}}&nbsp<i class="fa-solid fa-seedling"></i>
+            </li>
+
+            <li><i class="fa-solid fa-won-sign"></i>&nbsp{{item.item_price}}</li>
+            <p><i class="fa-regular fa-user"></i> &nbsp{{item.user_name}}</p>
+            <p class="myButton" style="font-size: 12px;"><i> &nbsp{{item.trade_status}} </i></p>
+
+          </a>
+
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- --------------paging 23/01/08------------>
+  
+  <ul class="paging">
+    {% if items.has_previous %}
+    <li class="prev">
+      <a class="" href="?page={{ items.previous_page_number}}"><i class="fa-solid fa-angle-left"></i></a>
+    </li>
+    {% else %}
+    <li class="prev">
+      <a class="" tabindex="-1" aria-disabled="true" href="#"><i class="fa-solid fa-angle-left"></i></a>
+    </li>
+    {% endif %}
+  
+    {% for page_number in items.paginator.page_range %}
+    {% if page_number >= items.number|add:-4 and page_number <= items.number|add:4%}
+  
+    {% if page_number == items.number %}
+    <li class="on" aria-current="page">
+      <a class="" href="?page={{ page_number }}">{{ page_number }}</a>
+    </li>
+    {% else %}
+    <li class="on">
+      <a class="" href="?page={{ page_number }}">{{ page_number }}</a>
+    </li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+  
+    {% if items.has_next %}
+    <li class="next">
+      <a class="" href="?page={{ items.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a>
+    </li>
+    {% else %}
+    <li class="next">
+      <a class="" tabindex="-1" aria-disabled="true" href="#"><i class="fa-solid fa-angle-right"></i></a>
+    </li>
+    {% endif %}
+  </ul>
+
+
+ 
+
+
+
+  <!-- jQuery -->
+  <script src="{%static 'assets/js/jquery-2.1.0.min.js' %}"></script>
+
+  <!-- Bootstrap -->
+  <script src="{%static 'assets/js/popper.js' %}"></script>
+  <script src="{%static 'assets/js/bootstrap.min.js' %}"></script>
+
+  <!-- Plugins -->
+  <script src="{%static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{%static 'assets/js/accordions.js' %}"></script>
+  <script src="{%static 'assets/js/datepicker.js'%}"></script>
+  <script src="{%static 'assets/js/scrollreveal.min.js'%}"></script>
+  <script src="{%static 'assets/js/waypoints.min.js'%}"></script>
+  <script src="{%static 'assets/js/jquery.counterup.min.js'%}"></script>
+  <script src="{%static 'assets/js/imgfix.min.js'%}"></script>
+  <script src="{%static 'assets/js/slick.js'%}"></script>
+  <script src="{%static 'assets/js/lightbox.js' %}"></script>
+  <script src="{%static 'assets/js/isotope.js' %}"></script>
+
+  <!-- Global Init -->
+  <script src="{%static 'assets/js/custom.js' %}"></script>
+  <script>
+
+    $(function () {
+      var selectedClass = "";
+      $("p").click(function () {
+        selectedClass = $(this).attr("data-rel");
+        $("#portfolio").fadeTo(50, 0.1);
+        $("#portfolio div").not("." + selectedClass).fadeOut();
+        setTimeout(function () {
+          $("." + selectedClass).fadeIn();
+          $("#portfolio").fadeTo(50, 1);
+        }, 500);
+
+      });
+    });
+
+  </script>
+</body>
+
+
+
+</html>

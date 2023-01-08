@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Boot strap -->
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            text-decoration: none;
+            font-family:sans-serif;
+
+            }
+
+        body {
+            background-image:#34495e;
+            }
+
+        .joinForm {
+            position:absolute;
+            width:400px;
+            height:400px;
+            padding: 30px, 20px;
+            background-color:#FFFFFF;
+            text-align:center;
+            top:40%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            border-radius: 15px;
+            }
+        
+        .joinForm h2 {
+            text-align: center;
+            margin: 30px;
+            
+            }
+
+        .textForm {
+            border-bottom: 2px solid #adadad;
+            margin: 30px;
+            padding: 10px 10px;
+            }
+        .textForm1{
+            display:flex;
+            border-bottom: 2px solid #adadad;
+            margin: 30px;
+            padding: 10px 10px;
+        }
+        .textForm1 .int{
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+        .id {
+            width: 100%;
+            border:none;
+            outline:none;
+            color: #636e72;
+            font-size:16px;
+            height:25px;
+            background: none;
+            }
+
+        .pw {
+            width: 100%;
+            border:none;
+            outline:none;
+            color: #636e72;
+            font-size:16px;
+            height:25px;
+            background: none;
+            }
+
+        .email {
+            width: 100%;
+            border:none;
+            outline:none;
+            color: #636e72;
+            font-size:16px;
+            height:25px;
+            background: none;
+            }
+
+        .btn {
+            position:relative;
+            left:40%;
+            transform: translateX(-50%);
+            margin-bottom: 40px;
+            width:80%;
+            height:40px;
+            background: linear-gradient(125deg,#81ec9f,#85e692,#81ec9f
+);
+            background-position: left;
+            background-size: 200%;
+            color:white;
+            font-weight: bold;
+            border:none;
+            cursor:pointer;
+            transition: 0.4s;
+            display:inline;
+            }
+
+        .btn:hover {
+            background-position: right;
+            }
+        
+       
+
+    </style>
+    <script>
+        function submit_click(){
+            var pw = document.getElementById('signupPW').value
+            var pwcheck = document.getElementById('signupPWcheck').value
+            if(pw == pwcheck){
+                document.getElementById('signup-form').submit();
+            }else{
+                alert("비밀번호가 일치하지 않습니다.")
+                document.getElementById('signupPWcheck').focus()
+            }
+        }
+    </script>
+      <!-- navbar  -->
+      <link rel="stylesheet" href="{%static 'css/style.css' %}">
+     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+     <script src="https://kit.fontawesome.com/221ae2e8b7.js" crossorigin="anonymous"></script> 
+     <script src="{%static 'js/main.js' %}" defer></script>
+</head>
+<body>
+     <!-- navbar Start-->
+     <nav class="navbar">
+      
+        <div class="navbar__logo">
+        <i class="fa-solid fa-leaf"></i>
+          <a style="color: #000000;"
+          href="{%url 'main_index' %}">Albo Market</a>
+        </div>
+      
+        <ul class="navbar__menu">
+            <li><a style="color: #000000;" href="{%url 'main_index' %}">홈</a></li>
+      
+            <li><a style="color: #000000;" href="{%url 'main_signup' %}">회원가입</a></li>
+            <li><a style="color: #000000;" href="{%url 'main_signin' %}">로그인</a></li>
+            <li><a style="color: #000000;" href="{%url 'main_logout' %}" >로그아웃</a></li>
+            <li><a style="color: #000000;" href="{%url 'main_upload' %}">사진업로드</a></li>
+            <li><a href="{%url 'main_mypage' %}">마이페이지</a></li>
+            <li><a href="{% url 'user_remove' %}">회원탈퇴</a></li>
+        </ul>
+      
+        <ul class="navbar__icons">
+          <li><i class="fa-brands fa-twitter"></i></li>
+          <li><i class="fa-brands fa-facebook"></i></li>
+          <li><i class="fa-brands fa-instagram"></i></li>
+        </ul>
+      
+        <!-- <a href="#" class="navbar__toogleBtn">
+          <i class="fa-solid fa-bars"></i>
+        </a> -->
+      
+      </nav>
+          <!-- navbar End -->
+    <div class="container">
+   
+
+
+        <form action="{% url 'main_join'  %}" method="POST" id="signup-form" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">{% csrf_token %}
+                                                                                               
+            <h2 style="color:#354138; "><b>회원가입</b></h2>
+            <div class="textForm">
+              <input id="signupName" name="signupName" type="text" class="id" placeholder="이름">
+              </input>
+            </div>
+            <div class="textForm">
+               <input  id="signupEmail" name="signupEmail" type="email" class="email" placeholder="이메일(아이디)">
+            </div>
+            <div class="textForm">
+              <input id="signupPW" name="signupPW" type="password" class="pw" placeholder="비밀번호">
+            </div>
+             <div class="textForm">
+              <input id="signupPWcheck" name="signupPWcheck" type="password" class="pw" placeholder="비밀번호 확인">
+            </div>
+            <div class="textForm1" id="age">
+                <label >생년월일</label>
+                <div class="bir_yy">
+                 <span class="ps_box">
+                <input type="text" name="year" id="year" class="int" placeholder="년(4자)" maxlength="4" size="8">
+                 </span>
+                </div>
+
+                <div class="bir_mm">
+                <span class="ps_box">
+                <select name= "month" class="sel"  id="month" aria-label="월" required>
+                  <option selected disabled value="월" >월</option>
+                  <option value="01">1</option>
+                  <option value="02">2</option>
+                  <option value="03">3</option>
+                  <option value="04">4</option>
+                  <option value="05">5</option>
+                  <option value="06">6</option>
+                  <option value="07">7</option>
+                  <option value="08">8</option>
+                  <option value="09">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>  
+            </span>
+            </div>
+
+            <div class="bir_dd">
+                <span class="ps_box">
+                <input  name= "day" id="day" type="text" class="int" maxlength="2" placeholder="일" size="7">
+            </span>
+            </div>
+
+              </div>
+
+              <div class="textForm" >
+                <label style="position: relative; right:70px;">성별</label>
+                <select class="sel" id="gender" name="gender" aria-label="성별" style="width:150px;" required>
+                  <option selected disabled value="성별" >성별</option>
+                  <option>남자</option>
+                  <option>여자</option>
+                </select>
+              </div>
+            <input type="submit" class="btn" onclick="submit_click();" value="J O I N"/> <!-- 회원가입하기 -->
+        </form>
+        
+    </div>
+</body>
+</html>

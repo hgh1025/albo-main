@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원탈퇴</title>
+</head>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+    }
+    .user_unregister {
+        display: inline;
+
+    }
+
+    .user_unregister .items {
+        /* margin: auto; */
+        padding-left: 100px;
+        right: 50px;
+    }
+
+   .toggleList-agreeCont{
+    display: inline-block;
+    border: 2px solid black ;
+   }
+</style>
+
+<body>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>join Agree</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <script src="./js/headerfooter.js"></script>
+        <link rel="stylesheet" href="./css/AboutUs.css">
+        <link rel="stylesheet" href="./css/login.css">
+        <link rel="stylesheet" href="./css/loginFind.css">
+        <link rel="stylesheet" href="./css/jointwo.css">
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header w3-include-html="header.html"></header>
+
+            <div id="container" class="container join">
+                <h1 class="hidden">회원탈퇴</h1>
+                <div class="topArea">
+                
+                  
+                <!-- //제목(topArea) -->
+                <div class="inner">
+                    <!-- 내용 -->
+                    <!-- 회원가입 약관 -->
+                    <h2 class="titDep2">회원탈퇴 약관</h2>
+                    <p class="pageGuide tleft">
+                        알보마켓은 체계적인 회원 정보 관리를 위하여 아래와 같이 개인정보를 수집·이용 및 제공하고자 합니다.
+                        <br>
+                        내용을 자세히 읽으신 후 동의여부를 결정하여 주시기 바랍니다.
+                    </p>
+                    <div class="agreeBox">
+                        <div class="nonToggle">
+                            <!-- 전체동의 -->
+                            <span class="frm frmAll">
+                                <input type="checkbox" id="frmChk00">
+                                <label for="frmChk00">
+                                    전체동의
+                                </label>
+                            </span>
+                            <ul class="listInfo">
+                                <li>아래 동의 항목을 개별 확인 후 각 항목마다 개별적으로 동의하실 수 있습니다.</li>
+                                <li>전체 동의 시 체크되는 동의 항목에는 선택동의 항목이 포함되어 있습니다.</li>
+                            </ul>
+                            <!-- //전체동의 -->
+                        </div>
+                        <ul class="toggleList-agreeCont">
+                            <li>
+                                <span class="frm type02">
+                                    <input type="checkbox" id="frmChk01" name="mberAgreChk" value="T0001"><label
+                                        for="frmChk01" onclick='is_checked()'>
+                                        [필수] 회원탈퇴 동의 약관
+                                    </label>
+                                </span>
+                                <button type="button" class="btnToggle"><span class="hidden">
+                                        상세내용 보기
+                                    </span></button>
+                            </li>
+                            <!-- ------------------------------------------------ -->
+                            <li class="toggle">
+                                <span class="frm type02">
+                                    <input type="checkbox" id="frmChk02" name="mberAgreChk" value="A0001"><label
+                                        for="frmChk02">
+                                        [필수] 개인정보수집 및 이용에 대한 동의
+                                    </label>
+                                </span>
+                                <button type="button" class="btnToggle" name="btnToggle">
+                                    <span class="hidden">상세내용 보기</span></button>
+                                <div class="agree toggleCont" style="display:none">
+                                    <div class="box toggleInner">
+                                        <p class="notiTxt">
+                                            회원가입과 관련하여 아래와 같은 개인정보를 수집 및
+                                            이용하고 있습니다.<br>
+                                            개인정보 처리에 대한 상세한 사항은 조선호텔앤리조트 홈페이지의 '개인정보처리방침'을 참조하십시오.</p>
+                                        <p class="notiTxt">
+                                            본 개인정보 수집 및 이용 동의서의 내용과 상충되는 부분은 본 동의서의 내용이
+                                            우선합니다.</p>
+                                        <table class="tblH">
+                                            <colgroup>
+                                                <col style="width:33%">
+                                                <col style="width:34%">
+                                                <col style="width:auto">
+                                            </colgroup>
+                                            <caption>개인정보수집 및 이용에 대한 동의 목록</caption>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">수집 항목</th>
+                                                    <th scope="col">수집 목적</th>
+                                                    <th scope="col">보유 기간</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" class="tcenter">
+                                                        회원 ID, 비밀번호, 이름,
+                                                        생년월일, 국적, 성별, 휴대폰번호</th>
+                                                    <td>서비스 이용자 식별 및 본인, 14세 이상 여부 확인</td>
+                                                    <td class="f18" rowspan="3">회원탈퇴 또는 5년간 이용실적 없을
+                                                        시</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row" class="tcenter">휴대폰번호, 이메일주소
+                                                    </th>
+                                                    <td>계약 이행을 위한 연락 및 민원업무 처리 등의 의사소통</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                        <p class="txtGuide">
+                                            위의 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있으나 동의를 거부하실 경우 회원가입, 멤버십
+                                            서비스 이용이 불가합니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="frm type02">
+                                    <input type="checkbox" id="frmChk03" name="mberAgreChk" value="A0003"><label
+                                        for="frmChk03">
+                                        [선택] 마케팅 활용 및 광고성정보 수신을 위한 개인정보 이용 동의
+                                    </label>
+                                </span>
+                                <button type="button" class="btnToggle" name="btnToggletwo">
+                                    <span class="hidden">
+                                        상세내용 보기
+                                    </span></button>
+                                <div class="agree2 toggleCont" style="display:none">
+                                    <div class="toggleInner">
+                                        <div class="nonSrollWrap">
+                                            <p class="notiTxt">
+                                                회원서비스 관련 정보, 할인상품 및 신상품 안내, 이벤트
+                                                및 맞춤 서비스 정보 수신을 위해
+                                                개인정보를 수집 및 이용하는 것에 동의 합니다.</p>
+                                            <div class="frmWrap">
+                                                <span class="frm">
+                                                    <input type="checkbox" id="frmChk03-1" name="mrkTyChk"
+                                                        value="01"><label for="frmChk03-1">SMS 수신동의</label>
+                                                </span>
+                                                <span class="frm">
+                                                    <input type="checkbox" id="frmChk03-2" name="mrkTyChk"
+                                                        value="02"><label for="frmChk03-2">E-MAIL 수신동의</label>
+                                                </span>
+                                                <span class="frm">
+                                                    <input type="checkbox" id="frmChk03-3" name="mrkTyChk"
+                                                        value="04"><label for="frmChk03-3">우편물 수신동의</label>
+                                                </span>
+                                                <span class="frm">
+                                                    <input type="checkbox" id="frmChk03-4" name="mrkTyChk"
+                                                        value="03"><label for="frmChk03-4">전화 수신동의</label>
+                                                </span>
+                                            </div>
+                                            <table class="tblH">
+                                                <colgroup>
+                                                    <col style="width:33%">
+                                                    <col style="width:34%">
+                                                    <col style="width:auto">
+                                                </colgroup>
+                                                <caption>마케팅·홍보 활용 동의 목록</caption>
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">수집 항목</th>
+                                                        <th scope="col">수집 목적</th>
+                                                        <th scope="col">보유 기간</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row" class="tcenter">
+                                                            이메일, 휴대폰번호, 주소</th>
+                                                        <td class="f18">행사 및 상품정보 안내 / 마케팅 활동</td>
+                                                        <td class="f18">회원탈퇴 또는 5년간 이용실적 없을 시</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <p class="txtGuide">
+                                                위 개인정보 수집·이용에 대한 동의를 거부할 수 있으나 동의 거부 시
+                                                할인 및 이벤트 정보 안내 등의 서비스가 제한됩니다.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="hidden">
+                                <span class="frm type02">
+                                    <input type="checkbox" id="frmChk04" name="mberAgreChk" value="A0004"><label
+                                        for="frmChk04">[선택] 마케팅 활용을 위한 개인정보 제 3자 제공에
+                                        대한 동의</label>
+                                </span>
+                                <button type="button" class="btnToggle"><span class="hidden">상세내용
+                                        보기</span></button>
+                                <!-- 버튼 클릭 시 li에 toggleOn 클래스 추가되면서 toggleCont 펼쳐짐 -->
+                                <div class="toggleCont" style="display: none;">
+                                    <div class="toggleInner" tabindex="0">
+                                        <p class="notiTxt"> 이벤트 및 맞춤 서비스 정보 수신을 위해
+                                            개인정보를 제 3자에게 제공하는 것에 동의
+                                            합니다.</p>
+                                        <table class="tblH">
+                                            <colgroup>
+                                                <col style="width:25%">
+                                                <col style="width:25%">
+                                                <col style="width:25%">
+                                                <col style="width:auto">
+                                            </colgroup>
+                                            <caption>마케팅 활용을 위한 개인정보 제 3자 제공에 대한 동의 목록</caption>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">수집 항목</th>
+                                                    <th scope="col">개인정보를 제공 받는 자</th>
+                                                    <th scope="col">제공 목적</th>
+                                                    <th scope="col">보유 기간</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" class="tcenter">성명, 회원번호,
+                                                        국적,<br>성별, 생년월일, 휴대폰번호,<br>이메일 주소
+                                            
+                                                    </th>
+                                                    <td class="f18">㈜알보마켓<br>㈜알보마켓</td>
+                                                    <td class="f18">회원 맞춤형 서비스<br>홍보 및 마케팅</td>
+                                                    <td class="f18">회원탈퇴 또는 5년간<br>이용실적 없을 시</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="txtGuide">
+                                            위의 개인정보 제공에 대한 동의를 거부할 수 있으나 동의 거부 시 면세점 할인 및
+                                            이벤트 정보 안내 등의 서비스를 제공받을 수 없습니다.</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="user_unregister">
+
+                        <form class="items" method="POST" action="user_remove2">
+                            {% csrf_token %}
+                            <input name="unregister" type="submit" value="회원탈퇴">
+
+                            <!-- 또 다른 방법 -->
+                            <!-- <button class = "unregister" name="unregister" id="unregister" type = "button" onclick = "location.href='user_remove2'" value="회원탈퇴">회원탈퇴</button> -->
+
+                        </form>
+                    </div>
+
+
+                </div>
+
+
+  
+</body>
+
+</html>

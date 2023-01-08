@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+
+
+        <title>Login</title>
+    
+ <!-- navbar START -->
+    <link rel="stylesheet" href="{%static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">    
+    <script src="https://kit.fontawesome.com/221ae2e8b7.js" crossorigin="anonymous"></script>
+    <script src="{%static 'js/main.js' %}" defer></script>
+ <!-- navbar  END-->
+
+ <!-- 로그인화면 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="{%static '/img/icons/favicon.ico'%}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{%static '/vendor/bootstrap/css/bootstrap.min.css'%}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{%static '/fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{%static '/fonts/Linearicons-Free-v1.0.0/icon-font.min.css'%}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{%static '/vendor/animate/animate.css'%}">
+    <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="{%static '/vendor/css-hamburgers/hamburgers.min.css'%}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{%static '/vendor/animsition/css/animsition.min.css'%}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{%static '/vendor/select2/select2.min.css'%}">
+    <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="{%static '/vendor/daterangepicker/daterangepicker.css'%}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{%static '/css/util_login.css'%}">
+        <link rel="stylesheet" type="text/css" href="{%static '/css/main_login.css'%}">
+    <!--===============================================================================================-->
+   
+    <!-- 로그인화면 -->
+
+    <!-- <style>
+        .content{
+            height: 75%;
+        }
+        .messageDiv{
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+        .custom-btn{
+            font-size: 10px;
+        }
+        .panel-footer{
+            height:10%;
+            color:gray;
+        }
+        
+
+        
+    </style> -->
+ <style>
+    .background{
+        width: 1200px;
+        height: 900px;
+        /* background-image: url("{%static 'img/bg-01.jpg' %}"); */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+ </style>
+
+  <!-- navbar Start-->
+     <nav class="navbar">
+        <div class="navbar__logo">
+        <i class="fa-solid fa-leaf"></i>
+          <a href="{%url 'main_index' %}">Albo Market</a>
+        </div>
+    
+        <ul class="navbar__menu">
+            <li><a href="{%url 'main_index' %}">홈</a></li>
+    
+            <li><a href="{%url 'main_signup' %}">회원가입</a></li>
+            <li><a href="{%url 'main_signin' %}">로그인</a></li>
+            <li><a class="nav-link disabled" href="">로그아웃</a></li>
+            <li><a href="{%url 'main_upload' %}">사진업로드</a></li>
+            <li><a href="{%url 'main_mypage' %}">마이페이지</a></li>
+      <li><a href="{% url 'user_remove' %}">회원탈퇴</a></li>
+        </ul>
+    
+        <ul class="navbar__icons">
+          <li><i class="fa-brands fa-twitter"></i></li>
+          <li><i class="fa-brands fa-facebook"></i></li>
+          <li><i class="fa-brands fa-instagram"></i></li>
+        </ul>
+    
+      
+        
+    </nav>
+     <!-- navbar END-->
+</head>
+<body>
+
+
+
+
+    <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" action="signin/login" method="POST">{% csrf_token %}
+					<span class="login100-form-title p-b-43">
+						Login to continue
+					</span>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input type="email" name='loginEmail' class="input100">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Email</span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input type="password" name='loginPW' class="input100">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Password</span>
+					</div>
+
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								Remember me
+							</label>
+						</div>
+
+						<div>
+							<a href="#" class="txt1">
+								Forgot Password?
+							</a>
+						</div>
+					</div>
+			
+
+					<div class="container-login100-form-btn">
+                        <!-- <input type="submit" class="btn btn-success btn-lg" value="로그인"> -->
+						<input type="submit" button class="login100-form-btn" value="Log in">
+							
+						</button>
+					</div>
+					
+					<div class="text-center p-t-46 p-b-20">
+						<span class="txt2">
+							or sign up using
+						</span>
+					</div>
+
+					<div class="login100-form-social flex-c-m">
+						
+                        <a href="javascript:kakaoLogin();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfUAAABkCAMAAACo21lxAAABBVBMVEX/3AD/////3wBHKSvIrADLrgDYw2P/4ADWwFn/4wDXuQA7GiyEaCRBIiw+HixaPijEpRZ4XSOliBtfQyhPMio0Dy1uUyYyDC3PrxT61wR+YiNFJivkww+hhRs4FSw9HSy6nBqtjxtqTiaafR6RdSAtAC3y0ATFphNlSidMLipVOCn10wNKLCv6+vXd1Z3OvlLPtzLYuBLYyXRUPDKylBiTdyCKbiElAC50VyV5XSPQukDpzSa/pz+wljanjDTJsTyok0SIc0F3YDpgSjaBbEh1YESyn0xlUUdcRD+pmVRGLj6SfkRZQjVHLDTXvSppVj95alRRO0QcAC4+HCI8IDmaiUW/nQ+sE7vLAAANkklEQVR4nO2da2PaOBaGqQj1GCNDuDg2MjZgIi6madwCJU3adGbamW7ayWxntvn/P2Ul35CJTYBBm3St90MDli3JenykoyOZFp4J5U+Fx66A0CNIUM+jBPU8SlDPowT1PEpQz6ME9TxqE/UXZ6+eC/2YenX2Yj/qZ2/1ktCPqqO3Z/tQf0kv5Sne+edbpHVf7k79J3JZ2S0AbpLKpSOJX/b5VgGXCb/nu1I/IxdhUOAoQKhzLSDfApgQzOrkM6i/OOcNXVDnLIr9PMOly6BOTN3kjERQ5yxgZhp7BvXnpSOXd6UEdc5yj7JG9gzqP5WOeNdJUOeuo9JPu1LnTURQ5y0gqOdQgnoeJajnUYJ6HiWo51GCeh4lqOdRgnoeJajnUYJ6HsWbOpAiga0vE9R5iyd1ANzLt1dX796/f//u6ur60t0SvKDOW/yoS+75h59/+fX16/EfEE6br3/95ecP13gb8II6b/GiDvDVx69TCBFRkYj+hcXXn367fPhqQZ23+FAH4O3vU+jjTghB9PlfD5q7oM5bXKiDy4/23/eQB/pb+f3yocsFdc7iQd24+qzct/NY6s0HvLlOgjpncaDuXr1Ws5n7/fyXjeYuqPPW4am77z7DjdAJ9j82Yj8MdcM1MiqYcXzf/DYk7FXQzjJ2vqGDUzeuvz4EnWLf1MkfhDru1fXU1vDqs+TW7uCVkKy6xPl167XERdEno1bvpRUEzFndY0pg3z9ZP3VzclrmNOwVldPr6Ts218Gp3/65uXsPBL9eZz+g+1FfRQElibbFm9YieLKY4yRXo3M6qUnxVVIBm1SGlFIiKLhmGGEA3uhEi6ssGSZ2wyvwsfXGTSlI6jZPO8EVpp6QuXbrbjJZjw2CvaXgtsLiXa/WHZqGXwGppihzece2OjD1yy/2FtCJS/fpNrtO+1AHXqceqQYI9ZY68JtP6sXHZyalrlRj6sDQ64s2UcW5M++3nFeftwcdD/jZa+oypAVwzaks5l3/FSCA2/DEp+7W4oJ65BqpVlXq/hXubNJgtSwn+xpzlEhuOGFN3GEtqfBxALrTHyuT47rp398QIeeRqV/fbPDe2T7efp856u1FXZq9sXwpitI0wYq6fGJFCXCepA7MxQgpLSJLmbRra2UaNQ0pim1rdyBBHZjORCUJ4wUdKWLqwGsqSlgUrEss9c6bk5UUdKKvUVeY5BMEG3J4XJtUE+r69ZZ0Darkduzpoiw9Cer4i7IVdNLHf/Iy67QX9W5fo1pWi8WWx1IPjmv9JoLLJHVzqarouNftzpyiDRt3SRjDBlSqgypJGEosdexMIWy3FQT9ISSmrreKzbCsZZelXjC9lcp121obhg0m2TMRHIXUcfM08bTAJU0AZhsqy5rXa6jIwU+C+u237Uyd6OY6s057jesuDlTWUKvMUC+Ex3FvorYT1KUlJESxQeSaFQVpHlMqwANVmZsurtiwjRnqQG/CSQ1jD6Imgbuydd1S52ZYlltgqbOumlxT1qkn02Pq5GlhhGcI+Qlyb6rSChleH1Z16SlQv97W1MnI/iXLjf8HPjwAkqmh0wIzrofHgdwbK3WWOjkFNfTQZQbGBUQdpvEkfQovSBcOjCY19hV17KjWzCAFzSzYdllbt+yOu6o3S11mlEKdTWapJ56GYdj14wU8CSYhXcWuu0+AuvFhe+p/f8yas/8z6sOGepFG3Viols5Sl7oKbMfNRU11wbgabl1RZj400rhzOaYOyLCg+a0OqnBEeock9VUGDHW9slK7ge5RnzPpFwx1VhTuQKaNs7SX/o0BD6lz/ASou//OCr+nUP+Utfy2H3XsuphOkRZjZRZRp7kYNKGk63catIgpZlEvDC1YYR4TvLAnnn+e2SIJkk/dd+vG6iJ4gd+xJ10JPEwdzy1oK5FUZK95czpS1TjZhqifQb1I4QLzWNVC6lWb1OTHoo6+Zb0Hvxd1+a9T4vsQbxwiu+xThws6yoK7NySBuOkKUhdGYOtdctwgrdZC/XLUw7uVRA9PqfeDGRaGEXXy/LiS3orgzpTJTNrC1omHMO4vY7V7yaFNGk7RZJWsDVJjLhH1Aq6oMGi5O4sWkG/q08lkUu2PmkV4YQSD9qSv9XtGrUkSRv0qKqrDAqVuTxuaNiKFS5qNlh42gFRwzY4F+4w3R6ZNdjuooHtsL8uEOpw4jtOTdUsJY3EEM+n6t6GujExm5F7FiIITCXWHHdlT7z2mDupF23El4q+21SmZbT4B6h936uGz6rTfzI2oVp41UJHCJdSLULFOHcOkCXppAeEF9mNzNiKz3TfEjkG5r9iTQXeo1zqaBasztg7mMqbeV49NQh0hxWo1fOrBOWRMcLalXpaTkTu25j51KTM9yi6EC8oahHXP08msg0YMHp/6Y3pztLlktzNVfJ+M2rrWobF4P6wJyDSnOfSr2LGbi16v7vey3mASxlUsVKmxgVLawzcC28eITN2orTfb7fZc1luqE3TRM6XZ22pcH9jVTpfRMBGgotSP79j0csrdSz1U7AW9xF1VtaqjiYIuaAUfn/pOM7fvh5+5GbOJOvKjP9Sbm7tyaDbArCDo+NMqOq4P5TCmDfCwvugXUbUyr62NN3huT4MB1msRh4D68BqdN0veJPLmCMzaduO6AhUa/1Pov63WyShRFvHmoEoSSLpF44Qttb42BlDJczQN4wzGcFAkuTUc/06fAPXbz9t28egmc/1lb+rGXRWOu0EshZ25ATxA9rEZnMPG4ek8HZMnZWDi9W7VmBFfyadZV6Ydf75+bNCJs3lBHiyagTumM7d7tk7PIb2OtKJu1LQ+0ahYnAYfFonnHeAKPdqfINTwP2jdNOoOmg6jSDLWa72hFy4uPT51vOXiC43IZi6x70kdFLpVGPW+LHVgLorqSA++rFGPbPL+6qfegKSLB7I5gQ2didIYdQvS8+Wesh6lIdNn2cDY02v1Sle6i+frrh9d08eoGizwrS+6+cfKc1XphnG4lLuTNTRe9fxkBhqtyD4B6oXzLVdfisq7zKXWPcd1w2lChnRMXfb6RbUaLY6nUu+k1IXMstFoaOrEd2obiYhsAzZ72J2N0YQu7jHUyaxhqY1GjUZ1bC2MVZQmsH9zDBty6gq6f8ygAXopc4FdJt3YamBgPP2nQB1/325ktz9mb5Heb+bmaUWI5nGnHlEHUm+M1MYwOm9r6sRXtlFz0kRqlQZmmZVWYuTjSXWMIJ3/M7b+Bqq2otiW1TppVWcs9aBGY1jdQMftUOpZqQBXUTO+WnYmo2hWL9Us67HX18G2uyrOs3PZhzqNisPmau4VU3cbKoTLctycEfV4x4I8JHQKKZMmgl2BEKoNejFL3e0UVZpQ8c+K19fxrO2HXImPXnaJbQfU40A6sXUU2Tpjz3Gyb+ur9LUdFXSgGclRBeWBPY4H+TKZmD72Xhpw/uC2ObqD6v2GvV77UAdlWOx7TGwtoi4v7KbjrmwopC63TyMpqGifRF9Y9xoUPGfuDMH6rgpSWEdbOnpQWky9IIVBmABN6C90l8eBLpbF4rgdfjkOQvmkmoMo+biBUP8i/LbsOn+dJnSCioj8afqw5QFsRtTp87tzax1+j+zDG+fQ9Pumn6Ldr4ev1xm2zLiOlzrb/0XUL6gd35O9NqmKI2kJ6qSh44F1ZetrCqhLvdM4xE7yjz+fBrEA0p+04gA9XEXrW44zbaZoPLpPfQ/x2A9//WvKay9s9z79sPH3h/eN0iTyYLy5RF4hdalXSVUnI4iQpM5qM3UwbKcXhENbd9KT7/Reqrr+U0mps6PBE7D1Arj+5Y9sc0fwz3ebf3T6EHtk11ZaV4rGdUlOVZYBZVJ/wNazyokeRZBVj/WdkgnHg1Af98qxvPLm10ruV5rLe263H75mWDuCN9/P78+Ok3X6X1DfNb89bX3ngraSvIDF5mglbUd3jtPbje71NAU7QvDbxwcMvXAo6qdWBvWTyV7U+60MW493RicldScnaTPCQ0jqnlpB9NbXSXH4FKgT93dFHUVWrt58/nJ9+YChFw5DvYAXi24aDONu4Xi75w7MziKdIe4NFqmPgz5f3O1czpbCw4T0J9HDF6RhGKxR/3NzY9v2zc3Nt4/fr24vC9s8MoegbvhbFlPkZiU8mF9G02Yl7FnQdkoZ7HcQr18tWPqxGmRdDG9rsw/d2vnt7SXesr8TbzfyFh/q8p3fr9OtxYXd374T1HmLz68W4D6ZuUFlNHx4EE+7XFDnLC7zdXdpI4gadbzjokB0vaDOWTyou46KmlrP3NnJiOokqHMWB+p41l/Ohzh9q+dWdRLUOYsDdXPoYbCvnft1EtQ5iwP1PVYD1jIQ1DlL/HpwHiWo51GCeh4lqOdRgnoeJajnUYJ6HiWo51GCeh4lqOdRgnoetQ917nUS1HlrV+rPS0e8f/ZcUOct96j0fCfqZ6VS1m9HHUqCOmcBs1Q624n6i/NS6cH3GP5hpQR1rgK4VDp/sRN1auycsQvqXEWhZ5l6JnXiz5VKZffef2txOEmEusQv+3yr4JYJvwxfbgP1Zy/JZUc8xTv/fIu07stMttnUn529pZcK/Zg6epvVvW+m/uzF2avnQj+mXp1lOHIPUhf6f5WgnkcJ6nmUoJ5HCep5lKCeRwnqeZSgnkf9F39uJPstyTraAAAAAElFTkSuQmCC" style="height:50% ; width:50%;"></a>
+					</div>
+				</form>
+
+               
+        
+				<div class="login100-more" style="background-image: url('static/img/bg-01.jpg'); 
+                background-repeat: no-repeat;  background-size: cover; " >
+
+			</div>
+		</div>
+	</div>
+
+   
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+   <script>
+    // 2c52a32c536a2f768d585fc6cc80c90f
+    window.Kakao.init("2c52a32c536a2f768d585fc6cc80c90f");
+
+    function kakaoLogin() {
+        window.Kakao.Auth.login({
+        scope:'profile_nickname,account_email,gender',
+        success : function(authObj) {
+            console.log(authObj);
+            window.Kakao.API.request({
+                url:'/v2/user/me',
+                success: res => {
+                    const kakao_account = res.kakao_account;
+                    console.log(kakao_account);
+                }
+            });
+        }
+    });
+}
+   </script> 
+
+<!--===============================================================================================-->
+    <script src="{%static '/vendor/jquery/jquery-3.2.1.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{%static '/vendor/animsition/js/animsition.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{%static '/vendor/bootstrap/js/popper.js'%}"></script>
+	<script src="{%static '/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{%static '/vendor/select2/select2.min.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{%static '/vendor/daterangepicker/moment.min.js'%}"></script>
+	<script src="{%static '/vendor/daterangepicker/daterangepicker.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{%static '/vendor/countdowntime/countdowntime.js'%}"></script>
+<!--===============================================================================================-->
+	<script src="{%static '/js/main_login.js'%}"></script>
+
+
+</body>
+</html>
