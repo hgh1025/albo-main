@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.db.models import Q # Q는 Django내 Model을 관리할 때 사용되는 ORM으로 SQL의 WHERE절과 같은 조건문을 추가할 때 사용한다.
 from .forms import *
 from datetime import datetime
-
+from django.contrib import messages
 
 from google.protobuf import descriptor as _descriptor
 
@@ -176,7 +176,7 @@ def join(request):
     # else:
         
     #     return HttpResponse("이메일 발송에 실패했습니다.")
-def signin(request):
+def signin(request): #로그인페이지
     
 
     return render(request, 'main/signin.html')   
@@ -192,14 +192,17 @@ def login(request):
         user = User.objects.get(user_email=loginEmail)
        
 
-        if loginPW ==user.user_password:
+        if loginPW ==user.user_password and loginEmail==user.user_email:
             request.session['user_name'] = user.user_name
             request.session['user_email'] = user.user_email
+            message=messages.add_message(request,messages.ERROR,'로그인에 성공하였습니다') 
+            
             return redirect('main_index')
         elif user.user_password != loginPW:
-            return HttpResponse('비밀번호를 틀렸습니다.')
+            message = '비밀번호를 틀렸습니다'
+            return HttpResponse(message)
         else:
-            return redirect('main_index')
+            return redirect('main_signin')
     except ObjectDoesNotExist:   
         message = '이메일이 존재하지 않습니다.'
         return HttpResponse(message)
