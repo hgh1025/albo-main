@@ -115,18 +115,7 @@
        
 
     </style>
-    <script>
-        function submit_click(){
-            var pw = document.getElementById('signupPW').value
-            var pwcheck = document.getElementById('signupPWcheck').value
-            if(pw == pwcheck){
-                document.getElementById('signup-form').submit();
-            }else{
-                alert("비밀번호가 일치하지 않습니다.")
-                document.getElementById('signupPWcheck').focus()
-            }
-        }
-    </script>
+
       <!-- navbar  -->
       <link rel="stylesheet" href="{%static 'css/style.css' %}">
      <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
@@ -170,7 +159,8 @@
    
 
 
-        <form action="{% url 'main_join'  %}" method="POST" id="signup-form" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">{% csrf_token %}
+        <form action="{% url 'main_join'  %}" method="POST" id="signup-form" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+        {% csrf_token %}
                                                                                                
             <h2 style="color:#354138; "><b>회원가입</b></h2>
             <div class="textForm">
@@ -234,5 +224,20 @@
         </form>
         
     </div>
+    
+    <script>
+        function submit_click(){
+            var pw = document.getElementById('signupPW').value
+            var pwcheck = document.getElementById('signupPWcheck').value
+            if(pw == pwcheck){
+                alert("회원가입에 성공하였습니다. 로그인을 진행해주세요.")
+                document.getElementById('signup-form').submit();
+                
+            }else{
+                alert("비밀번호가 일치하지 않습니다.")
+                document.getElementById('signupPWcheck').focus()
+            }
+        }
+    </script>
 </body>
 </html>

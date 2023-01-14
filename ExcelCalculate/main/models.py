@@ -2,7 +2,7 @@ from django.db import models
 from django.forms import ModelForm # 모델 폼 설정
 # Create your models here.
 class User(models.Model):
-    user_name = models.CharField(max_length= 20 , unique=True)
+    user_name = models.CharField(max_length= 20 ,primary_key=True)
     user_date = models.DateTimeField(auto_now_add=True) #가입일(처음 등록한 시간으로 저장)
     user_email = models.EmailField(unique=True)
     user_password = models.CharField(max_length = 100)

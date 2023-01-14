@@ -61,6 +61,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     #session을 사용하기 위한 코드 start
     "django.contrib.sessions.middleware.SessionMiddleware"
+    
 ]
 
 ROOT_URLCONF = "ExcelCalculate.urls"
