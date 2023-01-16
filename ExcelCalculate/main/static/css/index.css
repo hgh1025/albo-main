@@ -1,6 +1,7 @@
 html, body{
-    height: auto;
-    width:auto;
+    
+    width:100%;
+    
     }
     body {
       margin:0;
@@ -9,6 +10,23 @@ html, body{
     }
     
     /* navbar start */
+    :root {
+      --text-color: #121212;
+      --background-color: #f4f4f4;
+      --accent-color: #9b9e7b;
+  }
+  head{
+      margin:0;
+      font-family: 'Source Sans Pro';
+      background-color: #fff;
+      font-size: 16px;
+  }
+  
+  
+  a{
+      text-decoration: none;
+      color: var(--text-color);
+  }
 .navbar {
   
         top: 0;
@@ -123,7 +141,7 @@ html, body{
     position: absolute;
     top: 50%;
     transform: translateY(-25px);
-    left: 30px;
+    left: 35px;
     width: 50px;
     height: 50px;
     background-color: #bdd4a2;
@@ -144,7 +162,7 @@ html, body{
     position: absolute;
     top: 47%;
     transform: translateX(1400px);
-    left: 30px;
+    left: 190px;
     width: 50px;
     height: 50px;
     background-color: #bdd4a2;
@@ -203,6 +221,7 @@ html, body{
       /* 이미지 슬라이더 start */
     img{
       width:250px !important;
+      border-radius: 7px;
       
       }
     .wrap {
@@ -215,7 +234,7 @@ html, body{
         animation: scroll 40s linear infinite;
         perspective: 100px;
         font-weight: 200px;
-        background-color: #e4f5d4 !important;
+        background-color: #c6cebe !important;
         opacity: 0.9;
       }
   
@@ -295,8 +314,9 @@ html, body{
       /* 가격순, 등록순 ... start */
     .list_control {
         display: flex;
-        margin-top: 25px;
+        margin-top: 10px;
         margin-left: 25px;
+        margin-bottom: 2px;
       }
   
     .list_control li {
@@ -350,3 +370,15 @@ html, body{
     top:1px;
   }
 /* 거래 상태 버튼 end */
+
+.col-lg-8{
+width: auto;
+
+}
+#top{
+/* background: #a38ab1; */
+
+background-image: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTExMTVfNjAg%2FMDAxNjM2OTY0Njg4Mjgy.6hWbhNeIPT3q7lp4rrxzL9ShXcy4X-0EPIgWMVP61Cgg.xR4PBj3KHVVIF1xkF6H8eatGMCrwjqSdoQ96XQ2B2nAg.PNG.jdy0866%2FKakaoTalk_Photo_2021-11-15-17-24-30.png&type=ofullfill340_600_png');
+background-repeat: round;
+border:1px solid rgb(220, 214, 214);
+}

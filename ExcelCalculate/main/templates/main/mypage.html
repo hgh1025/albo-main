@@ -14,10 +14,10 @@
 <link rel="stylesheet" type="text/css" href="{%static 'assets/css/font-awesome.css' %}">
 
 <link rel="stylesheet" href="{%static 'assets/css/templatemo-klassy-cafe.css' %}">
-
+<!-- 
 <link rel="stylesheet" href="{%static 'assets/css/owl-carousel.css' %}">
 
-<link rel="stylesheet" href="{%static 'assets/css/lightbox.css' %}">
+<link rel="stylesheet" href="{%static 'assets/css/lightbox.css' %}"> -->
   <!-- navbar start -->
   <link rel="stylesheet" href="{%static 'css/style.css' %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,10 +78,11 @@
 .container{
   border : 1px solid rgb(246, 238, 238);
   background-color: rgb(246, 238, 238);
-  width: 5000px;
+  width: 1000px;
   /* height: 500px; */
   padding:50px;
-  margin-top: 100px
+  margin-top: 50px;
+  margin-bottom: 50px
 }
 .container2{
   border : 1px solid white;
@@ -104,17 +105,21 @@
     padding : 10px;
     display: flex;
  }
- .item_name ,.item_price{
-    flex-direction: row;
- }
  .container .item li{
     position:relative;
     right:-25px;
     bottom:10px;
     flex-direction: row;
+    
  }
-
-
+.item-element{
+  flex-direction: row;
+    padding-top: 11px;
+}
+.item a{
+  padding-top: 40px;
+  
+}
 </style>
      <!-- navbar Start-->
   <nav class="navbar">
@@ -177,7 +182,6 @@
     {% for item in items %}
     
     <div class="item">
-        
     <div class="item_img">
         {% if item.item_img %}
         <a href="{{item.get_absolute_url}}" target="_blank">
@@ -187,11 +191,11 @@
         {% endif %}
     </div>
     
-    <div class="item_name">
+    <div class="item-element">
       <li><i class="fa-solid fa-seedling"></i>&nbsp{{item.item_name}}&nbsp<i class="fa-solid fa-seedling"></i></li>  
     </div>
 
-    <div class="item_price">
+    <div class="item-element">
         <li><i class="fa-solid fa-won-sign"></i>&nbsp{{item.item_price}}</li>
     </div>
     <p class="myButton" style="font-size: 12px;margin-left:23px;"><i> &nbsp{{item.trade_status}} </i></p>

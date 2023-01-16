@@ -44,8 +44,8 @@ figure, header, nav, section, article, aside, footer, figcaption {
   outline: 0;
 }
 #top .Modern-Slider {
-  margin-inline: -100px -100px;
-  padding-left: 150px;
+  margin-inline: -80px -50px;
+  padding-left: 250px;
   padding-right: 80px;
   padding-top: 50px;
   padding-bottom: 50px;
@@ -362,7 +362,7 @@ ul.slick-dots {
   position: relative;
 }
 
-.Modern-Slider {background:rgb(251, 250, 250);}
+.Modern-Slider {background:white;}
 
 
 /* ==== Slick Slider Css Ruls === */
