@@ -257,12 +257,7 @@ def upload(request):
         return render(request, 'main/upload.html')
     
 
-    # page = request.GET.get('page','1')
-    # item_list =Item.objects.all().order_by('-pk')
-    # paginator = Paginator(item_list,8) #페이지당 8개씩 보여주기
-    # page_obj = paginator.get_page(page)
-    # context={'item_list': page_obj}
-    # return context
+  
 def posting(request):
     
     # 1208 수정 : 바로 글목록 볼 수 있게(양식다시제출 팝업 안 뜨게)

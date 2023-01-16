@@ -9,19 +9,16 @@ head{
     background-color: #fff;
     font-size: 16px;
 }
-body{
-    margin:0;
-    font-weight: 400;
-    
-}
+
 
 a{
     text-decoration: none;
     color: var(--text-color);
 }
 .navbar {
+  
     top: 0;
-    /* width: 100%; */
+    width: 100%;
     left: 0;
     right: 0;
     /* position: fixed; */
@@ -144,14 +141,15 @@ a{
 }
 .wrap {
    margin-top: 40px;
-   margin-left:350px;
-   margin-right: 350px;
+   margin-left:320px;
+   margin-right: 320px;
    
 
   }
   .wrap .col-xs{
     width:20% !important; 
-
+    display:flex;
+    
   }
 
 .col-xs-4 {
@@ -188,6 +186,7 @@ a{
    }
    
 .col-xs-3 {
+   
     width: 250px;
     height: auto;
     float: left;

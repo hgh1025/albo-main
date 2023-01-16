@@ -68,11 +68,6 @@
       <i class="fa-solid fa-bars"></i>
     </a>
 </nav>
- <style>
- .asc{
- background: #a7c520;
- }
- </style>      
 
 </head>
 
@@ -88,7 +83,7 @@
         <a href="{% url 'main_desc' %}" class="desc">낮은가격순</a>
       </li>
       <li>
-        <a href="{% url 'main_asc' %}" class="asc">높은가격순</a>
+        <a href="{% url 'main_asc' %}" class="asc" style="background: #a7c520 ;">높은가격순</a>
       </li>
       <li>
         <a href="{% url 'main_index' %}" class="on" id="view">한줄로보기</a>

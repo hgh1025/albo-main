@@ -5,6 +5,7 @@
 <head>
   <title>게시글!</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=0.9">
   <!-- Boot strap -->
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -38,19 +39,15 @@
   <script src="{%static 'js/main.js' %}" defer></script>
   <!-- navbar end-->
 
-
 <style>
-
-.new{
-background: #a7c520 ;
-}
-.wrap{
-
-min-height: 90%;
-max-height: 90%;
+body{
+  max-width: 2100px;
+  min-width: 2130px;
+  margin:0;
+  font-weight: 400;
+  
 }
 </style>
-
 </head>
 
 <body>
@@ -88,7 +85,7 @@ max-height: 90%;
   <div class="fl">
     <ul class="list_control">
       <li>
-        <a href="{% url 'main_posting' %}" class="new">최근순</a>
+        <a href="{% url 'main_posting' %}" class="new" style="background: #a7c520 ;">최근순</a>
       </li>
       <li >
         <a  href="{% url 'main_desc' %}">낮은가격순</a>
@@ -110,7 +107,7 @@ max-height: 90%;
   <div class="wrap">
     {% for item in items %}
 
-    <div class="col-xs-3">
+    <div class="col-xs-3" >
       <div class="col-xs-4">
         <form  action="posting/new_post" method="POST">{% csrf_token %}
 
@@ -156,12 +153,12 @@ max-height: 90%;
     {% if page_number >= items.number|add:-5 and page_number <= items.number|add:5%}
   
     {% if page_number == items.number %}
-    <li class="on" aria-current="page">
-      <a class="" href="?page={{ page_number }}">{{ page_number }}</a>
+    <li id="on" aria-current="page">
+      <a class="page-link" href="?page={{ page_number }}" >{{ page_number }}</a>
     </li>
     {% else %}
     <li class="on">
-      <a class="" href="?page={{ page_number }}">{{ page_number }}</a>
+      <a class="page-link" href="?page={{ page_number }}" >{{ page_number }}</a>
     </li>
     {% endif %}
     {% endif %}
@@ -220,6 +217,7 @@ max-height: 90%;
       });
     });
     
+  
 
   </script>
 </body>

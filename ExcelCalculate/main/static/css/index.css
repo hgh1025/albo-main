@@ -1,0 +1,352 @@
+html, body{
+    height: auto;
+    width:auto;
+    }
+    body {
+      margin:0;
+     font-weight: 400;
+     overflow:hidden;
+    }
+    
+    /* navbar start */
+.navbar {
+  
+        top: 0;
+        width: 100%;
+        left: 0;
+        right: 0;
+        /* position: fixed; */
+        margin: 0 ;
+    
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--background-color);
+        padding: 8px 12px;
+      
+    }
+    
+.navbar__logo {
+        font-size: 24px;
+        color:var(--text-color);
+    
+    }
+    
+.navbar__logo i {
+        color: rgb(24, 24, 23);
+    }
+    
+.navbar__menu {
+        display: flex;
+        list-style: none;
+        padding-left: 0;
+    
+    }
+    
+ .navbar__menu li {
+        padding: 8px 12px;
+    
+    }
+ .navbar__menu li:hover {
+        background-color: var(--accent-color);
+        border-radius: 4px;
+    }
+.navbar__icons{
+        list-style: none;
+        color: var(--text-color);
+        display: flex;
+        padding-left: 0;
+    
+    }
+    
+.navbar__icons li {
+        padding: 8px 12px;
+    }
+    
+.navbar__toggleBtn{
+        display: none;
+        position: absolute;
+        right: 32px;
+        font-size: 24px;
+        color: black;
+    }
+    
+@font-face {
+           
+        font-family: 'SUIT-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    
+    }
+    
+    @media screen and (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 8px 24px;
+        }
+        .navbar__menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            /* padding-left: 0; */
+        }
+        .navbar__menu li{
+            width: 100%;
+            text-align: center;
+        }
+        .navbar__icons {
+            display: none;
+            justify-content: center;
+            width: 100%;
+            /* padding-left: 0; */
+            
+        }
+    
+        .navbar__toggleBtn{
+            display: block;
+        }
+    
+        .navbar__menu.active,
+        .navbar__icons.active {
+            display: flex;
+        }
+    }
+    
+    /* navbar END */
+    
+    
+   /* ==== Slider Style === */
+  .Modern-Slider .PrevArrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-25px);
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #bdd4a2;
+    border: 0 none;
+    line-height: 44px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 36px;
+    color: rgb(98, 91, 91);
+    z-index: 5;
+    outline: none;
+    opacity: 1;
+    transition: all .3s;
+    
+  }
+      
+    .Modern-Slider .NextArrow{
+    position: absolute;
+    top: 47%;
+    transform: translateX(1400px);
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #bdd4a2;
+    border: 0 none;
+    line-height: 44px;
+    border-radius: 50%;
+    text-align: center;
+    color: rgb(98, 91, 91);
+    z-index: 5;
+    outline: none;
+    opacity: 1;
+    transition: all .3s;
+    font-size: 36px;
+    
+  }
+  
+    #top .left-content {
+        /* background-image: url("{%static 'img/KakaoTalk_20221215_105156732.png' %}"); */
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding-left: 7px;
+      }
+  
+    #top .item {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        padding-right: 137px;
+      }
+  
+    .main-white-button a {
+        font-size: 13px;
+        color: #7bb545;
+        background-color: #fff;
+        padding: 12px 25px;
+        display: inline-block;
+        border-radius: 3px;
+        font-weight: 600;
+        transition: all .3s;
+      }
+  
+   
+  
+    .Modern-Slider .item .img-fill {
+        height: 100%;
+        max-height: 700px;
+        background: rgb(255, 255, 255);
+      }
+  
+  
+  
+      /* 이미지 슬라이더 start */
+    img{
+      width:250px !important;
+      
+      }
+    .wrap {
+        display: flex;
+        margin: 15px;
+        height: auto;
+        width: 200%;
+        place-items: center;
+        position: relative;
+        animation: scroll 40s linear infinite;
+        perspective: 100px;
+        font-weight: 200px;
+        background-color: #e4f5d4 !important;
+        opacity: 0.9;
+      }
+  
+    .col-xs-3 {
+        display: flex;
+        width: calc(250px * 18);
+        
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin: 10px;
+        perspective: 100px;
+  
+      }
+  
+    .wrap:hover {
+        animation-play-state: paused;
+      }
+  
+    .col-xs-4 {
+
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        perspective: 100px;
+  
+      }
+  
+    .wrap img {
+        width: auto;
+        transition: transform 1s;
+      }
+  
+    .wrap img:hover {
+        transform: translateZ(20px);
+      }
+  
+      /* image hover effect start */
+  
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+  
+        100% {
+          transform: translateX(calc(-250px * 9)); /*사진 이미지 슬라이더효과*/
+        }
+      }
+  
+      /* image hover effect end */
+      /* 이미지 슬라이더 end */
+  
+      /* GRADIENT SHADOWS */
+      /* .wrap::before,
+      .wrap::after{
+        background: linear-gradient(to right, rgba(255,255,255,1) 0%,
+        rgba(255,255,255,0) 100%);
+        content: '';
+        height:100%;
+        position:absolute;
+        width: 15%;
+        z-index: 2;
+      }
+      .wrap::before{
+        left:0;
+        top:0;
+      }
+      .wrap::after{
+        right:0;
+        top: 0;
+        transform: rotateZ(180deg);
+      } */
+      /* GRADIENT SHADOWS end*/
+  
+  
+  
+  
+      /* 가격순, 등록순 ... start */
+    .list_control {
+        display: flex;
+        margin-top: 25px;
+        margin-left: 25px;
+      }
+  
+    .list_control li {
+        flex-direction: row;
+        justify-content: center;
+      }
+  
+    .list_control li a .on {
+        /* border-left: 1px solid #a7c520; */
+        border: 1px solid #a7c520;
+      }
+  
+    .list_control li a:hover {
+        background: #a7c520;
+        color: #fff !important;
+        border-radius: 0 5px 0 0
+      }
+  
+    .list_control li a {
+        font-weight: bold;
+        display: block;
+  
+        padding: 8px 20px;
+        border: 1px solid #a7c520;
+      }
+  
+    .list_control #view {
+       border-radius: 7px;
+        margin-left: 50px;
+        background-color: #a7c520;
+  
+      }
+  
+  /* 거래 상태 버튼 start */
+  .myButton {
+    background-color:#86cfa2;
+    border-radius:10px;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    padding:2px 7px;
+    text-decoration:none;
+    font-family: 'LINESeedKR-Bd';
+
+  }
+  .myButton:hover {
+    background-color:#62ab81;
+  }
+  .myButton:active {
+    position:relative;
+    top:1px;
+  }
+/* 거래 상태 버튼 end */

@@ -35,7 +35,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- navbar start -->
-  <link rel="stylesheet" href="{%static 'css/style.css' %}">
+  <link rel="stylesheet" href="{%static 'css/index.css' %}">
+  <!-- <link rel="stylesheet" href="{%static 'css/style.css' %}"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
@@ -43,215 +44,17 @@
   <script src="{%static 'js/main.js' %}" defer></script>
   <!-- navbar end-->
   <style>
- /* ==== Slider Style === */
-.Modern-Slider .PrevArrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-25px);
-  left: 30px;
-  width: 50px;
-  height: 50px;
-  background-color: #90a378;
-  border: 0 none;
-  line-height: 44px;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 36px;
-  color: black;
-  z-index: 5;
-  outline: none;
-  opacity: 1;
-  transition: all .3s;
-  
-}
-    
-  .Modern-Slider .NextArrow{
-  position: absolute;
-  top: 47%;
-  transform: translateX(1400px);
-  left: 30px;
-  width: 50px;
-  height: 50px;
-  background-color: #90a378;
-  border: 0 none;
-  line-height: 44px;
-  border-radius: 50%;
-  text-align: center;
-  color: black;
-  z-index: 5;
-  outline: none;
-  opacity: 1;
-  transition: all .3s;
-  font-size: 36px;
-  
-}
+   
 
     #top .left-content {
       background-image: url("{%static 'img/KakaoTalk_20221215_105156732.png' %}");
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      position: relative;
-      width: 100%;
-      height: 100%;
-      padding-left: 7px;
+   
     }
-
-    #top .item {
-      position: relative;
-      width: 50%;
-      height: 100%;
-      padding-right: 137px;
-    }
-
-    .main-white-button a {
-      font-size: 13px;
-      color: #7bb545;
-      background-color: #fff;
-      padding: 12px 25px;
-      display: inline-block;
-      border-radius: 3px;
-      font-weight: 600;
-      transition: all .3s;
-    }
-
- 
-
-    .Modern-Slider .item .img-fill {
-      height: 100%;
-      max-height: 700px;
-      background: rgb(255, 255, 255);
-    }
-
-    /* 이미지 슬라이더 start */
-    .wrap {
-      display: flex;
-      margin: 15px;
-      height: auto;
-      width: 90%;
-      place-items: center;
-      position: relative;
-      animation: scroll 40s linear infinite;
-      perspective: 100px;
-      font-weight: 200px;
-    }
-
-    .col-xs-3 {
-      display: flex;
-      width: calc(250px * 18);
-      
-      padding-top: 15px;
-      padding-bottom: 15px;
-      margin: 10px;
-      perspective: 100px;
-
-    }
-
-    .wrap:hover {
-      animation-play-state: paused;
-    }
-
-    .col-xs-4 {
-
-      display: flex;
-      align-items: center;
-      padding: 15px;
-      perspective: 100px;
-
-    }
-
-    .wrap img {
-      width: auto;
-      transition: transform 1s;
-    }
-
-    .wrap img:hover {
-      transform: translateZ(20px);
-    }
-
-    /* image hover effect start */
-
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(calc(-250px * 9));
-      }
-    }
-
-    /* image hover effect end */
-    /* 이미지 슬라이더 end */
-
-    /* GRADIENT SHADOWS */
-    /* .wrap::before,
-    .wrap::after{
-      background: linear-gradient(to right, rgba(255,255,255,1) 0%,
-      rgba(255,255,255,0) 100%);
-      content: '';
-      height:100%;
-      position:absolute;
-      width: 15%;
-      z-index: 2;
-    }
-    .wrap::before{
-      left:0;
-      top:0;
-    }
-    .wrap::after{
-      right:0;
-      top: 0;
-      transform: rotateZ(180deg);
-    } */
-    /* GRADIENT SHADOWS end*/
-
-
-
-
-    /* 가격순, 등록순 ... start */
-    .list_control {
-      display: flex;
-      margin-top: 25px;
-      margin-left: 25px;
-    }
-
-    .list_control li {
-      flex-direction: row;
-      justify-content: center;
-    }
-
-    .list_control li a .on {
-      /* border-left: 1px solid #a7c520; */
-      border: 1px solid #a7c520;
-    }
-
-    .list_control li a:hover {
-      background: #a7c520;
-      color: #fff !important;
-      border-radius: 0 5px 0 0
-    }
-
-    .list_control li a {
-      font-weight: bold;
-      display: block;
-
-      padding: 8px 20px;
-      border: 1px solid #a7c520;
-    }
-
-    .list_control #view {
-     border-radius: 7px;
-      margin-left: 50px;
-      background-color: #a7c520;
-
-    }
-
 
   
   </style>
 
-  <!-- navbar Start-->
+  <!-- navbar CSS Start-->
   <nav class="navbar">
 
     <div class="navbar__logo">
@@ -283,7 +86,7 @@
   </a> -->
 
   </nav>
-  <!-- navbar End -->
+  <!-- navbar CSS End -->
 
 </head>
 
