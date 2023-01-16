@@ -1,10 +1,12 @@
 html, body{
-    
+  -webkit-text-size-adjust : 100%;
     width:100%;
+    
     
     }
     body {
       margin:0;
+      
      font-weight: 400;
      overflow:hidden;
     }
@@ -227,7 +229,7 @@ html, body{
     .wrap {
         display: flex;
         margin: 15px;
-        height: auto;
+        height: 370px;
         width: 200%;
         place-items: center;
         position: relative;
