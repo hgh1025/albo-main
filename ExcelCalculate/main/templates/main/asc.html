@@ -38,24 +38,8 @@
   <script src="{%static 'js/main.js' %}" defer></script>
   <!-- navbar end-->
 
-
-<style>
-
-.new{
-background: #a7c520 ;
-}
-.wrap{
-
-min-height: 90%;
-max-height: 90%;
-}
-</style>
-
-</head>
-
-<body>
-   <!-- navbar Start-->
-   <nav class="navbar">
+  <!-- navbar Start-->
+  <nav class="navbar">
     <div class="navbar__logo">
       <i class="fa-solid fa-leaf"></i>
       <a href="{%url 'main_index' %}">Albo Market</a>
@@ -84,14 +68,24 @@ max-height: 90%;
       <i class="fa-solid fa-bars"></i>
     </a>
 </nav>
+ <style>
+ .asc{
+ background: #a7c520;
+ }
+ </style>      
+
+</head>
+
+<body>
+ 
 
   <div class="fl">
     <ul class="list_control">
       <li>
         <a href="{% url 'main_posting' %}" class="new">최근순</a>
       </li>
-      <li >
-        <a  href="{% url 'main_desc' %}">낮은가격순</a>
+      <li>
+        <a href="{% url 'main_desc' %}" class="desc">낮은가격순</a>
       </li>
       <li>
         <a href="{% url 'main_asc' %}" class="asc">높은가격순</a>
@@ -219,7 +213,7 @@ max-height: 90%;
 
       });
     });
-    
+
 
   </script>
 </body>

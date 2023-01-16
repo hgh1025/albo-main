@@ -195,12 +195,13 @@ def login(request):
         if loginPW ==user.user_password and loginEmail==user.user_email:
             request.session['user_name'] = user.user_name
             request.session['user_email'] = user.user_email
-            message=messages.add_message(request,messages.ERROR,'로그인에 성공하였습니다') 
+            # message=messages.add_message(request,messages.ERROR,'로그인에 성공하였습니다') 
             
             return redirect('main_index')
         elif user.user_password != loginPW:
             message = '비밀번호를 틀렸습니다'
             return HttpResponse(message)
+            
         else:
             return redirect('main_signin')
     except ObjectDoesNotExist:   
@@ -256,12 +257,12 @@ def upload(request):
         return render(request, 'main/upload.html')
     
 
-    page = request.GET.get('page','1')
-    item_list =Item.objects.all().order_by('-pk')
-    paginator = Paginator(item_list,8) #페이지당 8개씩 보여주기
-    page_obj = paginator.get_page(page)
-    context={'item_list': page_obj}
-    return context
+    # page = request.GET.get('page','1')
+    # item_list =Item.objects.all().order_by('-pk')
+    # paginator = Paginator(item_list,8) #페이지당 8개씩 보여주기
+    # page_obj = paginator.get_page(page)
+    # context={'item_list': page_obj}
+    # return context
 def posting(request):
     
     # 1208 수정 : 바로 글목록 볼 수 있게(양식다시제출 팝업 안 뜨게)
@@ -286,16 +287,10 @@ def posting(request):
                         user_name= users)
       new_name.save()
 
-      
-      
-      
-# ----chart start-------22/12/29
-   
-    
-     #페이지당 8개씩 보여주기   
+     #페이지당 10개씩 보여주기  최근순 
     page = request.GET.get('page','1')
     items =Item.objects.order_by('-pk')
-    paginator = Paginator(items,8)
+    paginator = Paginator(items,10)
     page_obj = paginator.get_page(page)
     context={'items': page_obj}
     # context={'item_list': items}     
@@ -303,9 +298,29 @@ def posting(request):
     return render(request, 'main/posting.html',context) 
 
   
+def desc(request):
+    
+     #페이지당 10개씩 보여주기  내림차순 23/01/16
+      
+      page = request.GET.get('page','1')
+      items =Item.objects.all().order_by('item_price')
+      paginator = Paginator(items,10)
+      page_obj = paginator.get_page(page)
+      context={'items': page_obj}    
+         
+      return render(request, 'main/desc.html',context) 
 
-
-
+def asc(request):
+  
+     #페이지당 10개씩 보여주기 오름차순  23/01/16
+      page = request.GET.get('page','1')
+      items =Item.objects.order_by('-item_price')
+      paginator = Paginator(items,10)
+      page_obj = paginator.get_page(page)
+      context={'items': page_obj}
+    #   context={'item_list': items}     
+         
+      return render(request, 'main/asc.html',context)
 
     
 
@@ -347,7 +362,7 @@ def predict_price(request):
     for chunk in file.chunks():
         fp.write(chunk)
         fp.close()
-
+# github = https://github.com/hgh1025/albo_epoch100.git 에서 다운로드 필요
     model_weight_path = r'C:\practice\adminpractice\ExcelCalculate\epoch100.h5'
     img = Image.open("%s%s"%(UPLOAD_DIR,file_name))
 

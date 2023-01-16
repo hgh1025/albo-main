@@ -133,12 +133,13 @@
       position: relative;
       animation: scroll 40s linear infinite;
       perspective: 100px;
+      font-weight: 200px;
     }
 
     .col-xs-3 {
       display: flex;
       width: calc(250px * 18);
-      padding: 100px;
+      
       padding-top: 15px;
       padding-bottom: 15px;
       margin: 10px;
@@ -240,7 +241,8 @@
     }
 
     .list_control #view {
-      margin-left: 1500px;
+     border-radius: 7px;
+      margin-left: 50px;
       background-color: #a7c520;
 
     }
@@ -348,19 +350,19 @@
     </div>
   </div>
     <!-- /* 가격순, 등록순 ... start */ -->
-  <div class="fl">
-    <ul class="list_control">
-      <li>
-        <a href="" class="on">신상품순</a>
+  <div class="fl" >
+    <ul class="list_control"  >
+      <!-- <li >
+        <a href="" class="on" style="color: #000000;">신상품순</a>
       </li>
       <li>
-        <a href="" class="on">낮은가격순</a>
+        <a href="" class="on" style="color: #000000;">낮은가격순</a>
       </li>
       <li>
-        <a href="" class="on">높은가격순</a>
-      </li>
+        <a href="" class="on" style="color: #000000;">높은가격순</a>
+      </li> -->
       <li>
-        <a href="{% url 'main_posting' %}" class="on" id="view">전체보기</a>
+        <a href="{% url 'main_posting' %}" class="on" id="view" style="color: #000000;">전체보기</a>
       </li>
     </ul>
   </div>
@@ -380,11 +382,11 @@
             <br>
             {% endif %}
 
-            <li>
-              <i class="fa-solid fa-seedling"></i>&nbsp{{item.item_name}}&nbsp<i class="fa-solid fa-seedling"></i>
+            <li style="color: #000000;">
+              <i class="fa-solid fa-seedling" ></i>&nbsp{{item.item_name}}&nbsp<i class="fa-solid fa-seedling"></i>
             </li>
 
-            <li><i class="fa-solid fa-won-sign"></i>&nbsp{{item.item_price}}</li>
+            <li style="color: #000000;"><i class="fa-solid fa-won-sign"></i>&nbsp{{item.item_price}}</li>
             <p><i class="fa-regular fa-user"></i> &nbsp{{item.user_name}}</p>
             <p class="myButton" style="font-size: 12px;"><i> &nbsp{{item.trade_status}} </i></p>
 
@@ -437,6 +439,7 @@
       });
     });
     
+    // javascript slider 효과
     $(".Modern-Slider").slick({
 	    autoplay:true,
 	    autoplaySpeed:10000,
