@@ -3,6 +3,55 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+<!-- navbar START -->
+<link rel="stylesheet" href="{%static 'css/style.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">    
+<script src="https://kit.fontawesome.com/221ae2e8b7.js" crossorigin="anonymous"></script>
+<script src="{%static 'js/main.js' %}" defer></script>
+<!-- navbar  END-->
+
+<!-- 로그인화면 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+    <link rel="icon" type="image/png" href="{%static '/img/icons/favicon.ico'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{%static '/vendor/bootstrap/css/bootstrap.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{%static '/fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{%static '/fonts/Linearicons-Free-v1.0.0/icon-font.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{%static '/vendor/animate/animate.css'%}">
+<!--===============================================================================================-->	
+    <link rel="stylesheet" type="text/css" href="{%static '/vendor/css-hamburgers/hamburgers.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{%static '/vendor/animsition/css/animsition.min.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{%static '/vendor/select2/select2.min.css'%}">
+<!--===============================================================================================-->	
+    <link rel="stylesheet" type="text/css" href="{%static '/vendor/daterangepicker/daterangepicker.css'%}">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{%static '/css/util_login.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static '/css/main_login.css'%}">
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+   <script src="{%static '/vendor/jquery/jquery-3.2.1.min.js'%}"></script>
+<!--===============================================================================================-->
+   <script src="{%static '/vendor/animsition/js/animsition.min.js'%}"></script>
+<!--===============================================================================================-->
+   <script src="{%static '/vendor/bootstrap/js/popper.js'%}"></script>
+   <script src="{%static '/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+<!--===============================================================================================-->
+   <script src="{%static '/vendor/select2/select2.min.js'%}"></script>
+<!--===============================================================================================-->
+   <script src="{%static '/vendor/daterangepicker/moment.min.js'%}"></script>
+   <script src="{%static '/vendor/daterangepicker/daterangepicker.js'%}"></script>
+<!--===============================================================================================-->
+   <script src="{%static '/vendor/countdowntime/countdowntime.js'%}"></script>
+<!--===============================================================================================-->
+   <script src="{%static '/js/main_login.js'%}"></script>
 
 
         <title>Login</title>
@@ -74,7 +123,6 @@
 
 
 
-
     <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -133,7 +181,7 @@
 					</div>
 				</form>
 
-               
+              
         
 				<div class="login100-more" style="background-image: url('static/img/bg-01.jpg'); 
                 background-repeat: no-repeat;  background-size: cover; " >
@@ -142,7 +190,6 @@
 		</div>
 	</div>
 
-   
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
    <script>
     // 2c52a32c536a2f768d585fc6cc80c90f
@@ -162,72 +209,21 @@
             });
         }
     });
-}
-function loginFinish(){
-    
-      console.log("로그인에 성공하였습니다.");
-      alert("로그인에 성공하였습니다.");
-    }
-    // elif (loginPW != user.user_password)
-    //   request.session['user_name'] = user.user_name
-    //   request.session['user_email'] = user.user_email
-    //   console.log("로그인에 실패하였습니다.");
-    //   alert("로그인에 실패하였습니다.");
- 
-     
-      
+   }
 
    </script> 
- <!-- navbar START -->
- <link rel="stylesheet" href="{%static 'css/style.css' %}">
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">    
- <script src="https://kit.fontawesome.com/221ae2e8b7.js" crossorigin="anonymous"></script>
- <script src="{%static 'js/main.js' %}" defer></script>
-<!-- navbar  END-->
+   
 
-<!-- 로그인화면 -->
-     <meta name="viewport" content="width=device-width, initial-scale=1">
- <!--===============================================================================================-->	
-     <link rel="icon" type="image/png" href="{%static '/img/icons/favicon.ico'%}">
- <!--===============================================================================================-->
-     <link rel="stylesheet" type="text/css" href="{%static '/vendor/bootstrap/css/bootstrap.min.css'%}">
- <!--===============================================================================================-->
-     <link rel="stylesheet" type="text/css" href="{%static '/fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}">
- <!--===============================================================================================-->
-     <link rel="stylesheet" type="text/css" href="{%static '/fonts/Linearicons-Free-v1.0.0/icon-font.min.css'%}">
- <!--===============================================================================================-->
-     <link rel="stylesheet" type="text/css" href="{%static '/vendor/animate/animate.css'%}">
- <!--===============================================================================================-->	
-     <link rel="stylesheet" type="text/css" href="{%static '/vendor/css-hamburgers/hamburgers.min.css'%}">
- <!--===============================================================================================-->
-     <link rel="stylesheet" type="text/css" href="{%static '/vendor/animsition/css/animsition.min.css'%}">
- <!--===============================================================================================-->
-     <link rel="stylesheet" type="text/css" href="{%static '/vendor/select2/select2.min.css'%}">
- <!--===============================================================================================-->	
-     <link rel="stylesheet" type="text/css" href="{%static '/vendor/daterangepicker/daterangepicker.css'%}">
- <!--===============================================================================================-->
-     <link rel="stylesheet" type="text/css" href="{%static '/css/util_login.css'%}">
-     <link rel="stylesheet" type="text/css" href="{%static '/css/main_login.css'%}">
- <!--===============================================================================================-->
-<!--===============================================================================================-->
-    <script src="{%static '/vendor/jquery/jquery-3.2.1.min.js'%}"></script>
-<!--===============================================================================================-->
-	<script src="{%static '/vendor/animsition/js/animsition.min.js'%}"></script>
-<!--===============================================================================================-->
-	<script src="{%static '/vendor/bootstrap/js/popper.js'%}"></script>
-	<script src="{%static '/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
-<!--===============================================================================================-->
-	<script src="{%static '/vendor/select2/select2.min.js'%}"></script>
-<!--===============================================================================================-->
-	<script src="{%static '/vendor/daterangepicker/moment.min.js'%}"></script>
-	<script src="{%static '/vendor/daterangepicker/daterangepicker.js'%}"></script>
-<!--===============================================================================================-->
-	<script src="{%static '/vendor/countdowntime/countdowntime.js'%}"></script>
-<!--===============================================================================================-->
-	<script src="{%static '/js/main_login.js'%}"></script>
-
+   
+ {%if loginPW == user.user_password %}
+ <script>
+ function loginFinish(){
+    
+    
+    alert("로그인에 성공하였습니다.");
+  }
+ </script>
+ {% endif %} 
 
 </body>
 </html>

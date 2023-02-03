@@ -160,7 +160,7 @@
       <h1 style="color:#688770; font-family:Helvetica;"><b>Sell your Monstera albo</b></h1>
       <hr>
 
-      <form method="POST" id="form1" enctype="multipart/form-data">{% csrf_token %}
+      <form method="POST" id="form1" enctype="multipart/form-data">{% csrf_token %} <!--자바스크립트를 통해 'upload/predict_price' 함수를 불러낸다.  -->
 
         <h5 style="color:#688770; font-family:KoPub;"><b>예상가격분류</b></h5>
         <p><input type="file" class="form-control mt-2" name="file1" id="file1"></p>
@@ -172,8 +172,9 @@
       </form>
       <!-- 예측가격 팝업 띄우기 -->
       <div style="float:left;">
-        <input type="button" class="myButton" id="가격을 예측해 드려요" value="구간 확인 하기"
-          onclick="alert('{{predict}}')">&nbsp&nbsp
+        <input type="button" class="myButton" id="가격을 예측해 드려요" value="구간 확인 하기" onclick="alert('{{predict}}')">
+        
+        &nbsp&nbsp 
       </div>
       <div style="color:#688770; float:left;">
         {% if predict %}
@@ -189,7 +190,8 @@
         <input type="text" class="form-control mt-2" name='item_price' placeholder="price">
         <textarea class="form-control mt-2" rows="10" name="item_content" placeholder="content"></textarea>
 
-        <input class="form-control mt-2" type="file" name="item_img" onchange="loadFile(this)">
+        <input class="form-control mt-2" type="file" name="item_img" onchange="loadFile(this)"> <!-- loadFile로 변환 -->
+        
         <div>
           <img id="preview" style="width:300px">
         </div>
@@ -245,7 +247,7 @@
         // 여러개의 이미지를 읽을수도 있기 때문에 
         if (input.files && input.files[0]) {
           var fr = new FileReader();
-          //파일리더로 일고 읽는게 완료되면  만들어준 아이디에 속성값을 지정하여 사용하겠다.
+          //파일리더로 알고 읽는게 완료되면  만들어준 아이디에 속성값을 지정하여 사용하겠다.
           fr.onload = function (event) {
             document.getElementById('preview').src = event.target.result;
           };

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages_constants
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -53,15 +54,16 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+     #session을 사용하기 위한 코드 start
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    #session을 사용하기 위한 코드 start
-    "django.contrib.sessions.middleware.SessionMiddleware"
     
+     #session time을 사용하기 위한 코드 start
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = "ExcelCalculate.urls"
@@ -142,7 +144,15 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 3
-ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT= 30
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 3 #로그인 3회 실패시
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT= 300 #로그인 300초간 제한
+ACCOUNT_LOGOUT_ON_GET = False #로그아웃 할때 바로 로그아웃 = True / 묻고 로그아웃 = False
+
+SESSION_EXPIRE_SECONDS = 3600 #3600초 후에 세션 만료
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True #사용자가 마지막 활동을 한 시점 후부터 세션 만료 타임 측정되게 해줌 <->False 
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 60  #사용자가 마지막 활동 이후 60초가 지나야 세션 만료 타임을 계산함. //default = 1
+SESSION_TIMEOUT_REDIRECT = '/signin'  # 세션 시간이 만료되면 갈 url 주소
+SESSION_SAVE_EVERY_REQUEST = True #연장할 것인지 물어봄 (True<-> False)
+
 
 

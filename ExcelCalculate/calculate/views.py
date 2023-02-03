@@ -34,26 +34,10 @@ import pandas as pd
 
 def update_model(request):
 
-    # trade = Trade.objects.all() 
-    # trade_count = len(trade)
-    # td = Trade.objects.get(pk=1)
 
-    modeling.main()
+#modeling.py
+    modeling.main() 
 
-    #테이블에 데이터가 64개 이상일 경우에만 실행
-    # if trade_count >= 64:
-    #     # 기존 모델 파일 삭제
-    #     os.remove(r'C:\albino\My-albo\ExcelCalculate\epoch100.h5')
-
-        
-
-    #     #데이터 보강 실행
-    #     modeling.main()
-    #     print(type(td.item_price))
-
-    
-    # else:
-    #     print(trade_count)
         
 
     return render(request, 'modeling.html')
