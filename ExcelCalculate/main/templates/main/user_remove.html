@@ -86,7 +86,7 @@
                             <li>
                                 <span class="frm type02">
                                     <input type="checkbox" id="frmChk01" name="mberAgreChk" value="T0001"><label
-                                        for="frmChk01" onclick='is_checked()'>
+                                        for="frmChk01" onclick='is_checked()' method="POST">{% csrf_token %}
                                         [필수] 회원탈퇴 동의 약관
                                     </label>
                                 </span>
@@ -98,7 +98,7 @@
                             <li class="toggle">
                                 <span class="frm type02">
                                     <input type="checkbox" id="frmChk02" name="mberAgreChk" value="A0001"><label
-                                        for="frmChk02">
+                                        for="frmChk02" method="POST">{% csrf_token %}
                                         [필수] 개인정보수집 및 이용에 대한 동의
                                     </label>
                                 </span>

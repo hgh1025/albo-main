@@ -70,12 +70,15 @@
       <li><a style="color: #000000;" href="{%url 'main_index' %}">홈</a></li>
 
       <li><a style="color: #000000;" href="{%url 'main_signup' %}">회원가입</a></li>
+      
+      {% if 'user_name' not in request.session.keys  %}
       <li><a style="color: #000000;" href="{%url 'main_signin' %}">로그인</a></li>
+      {% endif %}
+      
+      {% if 'user_name' in request.session.keys  %}
       <li><a style="color: #000000;" href="{%url 'main_logout' %}">로그아웃</a></li>
       <li><a style="color: #000000;" href="upload">사진업로드</a></li>
-      {% if login_user == User.user_name %}
       <li><a style="color: #000000;" href="{%url 'main_mypage' %}">마이페이지</a></li>
-      
       {% endif %}
     </ul>
 
@@ -201,11 +204,11 @@
 
 
   <!-- jQuery -->
-  <script src="{%static 'assets/js/jquery-2.1.0.min.js' %}"></script>
+  <script src="{%static 'assets/js/jquery-2.1.0.min.js' %}" async></script>
 
   <!-- Bootstrap -->
-  <script src="{%static 'assets/js/popper.js' %}"></script>
-  <script src="{%static 'assets/js/bootstrap.min.js' %}"></script>
+  <script src="{%static 'assets/js/popper.js' %}" async></script>
+  <script src="{%static 'assets/js/bootstrap.min.js' %}" async></script>
 
   <!-- Plugins -->
   <script src="{%static 'assets/js/owl-carousel.js' %}"></script>
@@ -220,7 +223,7 @@
   <script src="{%static 'assets/js/isotope.js' %}"></script>
 
   <!-- Global Init -->
-  <script src="{%static 'assets/js/custom.js' %}"></script>
+  <script src="{%static 'assets/js/custom.js' %}" async></script>
   <script>
 
     $(function () {

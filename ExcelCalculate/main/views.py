@@ -114,14 +114,16 @@ def chart():
         'yaxis_title': '수량 (개)',
         'height': 480,
         'width': 1270,}
-
+    
     plot_div = plot({'data': graphs1, 'layout': layout_graph}, 
                     output_type='div')
+                    
+    users = User.objects.all()
     context = dict() 
     context['items'] = items
     context['plot_div'] = plot_div
     context['fig_div'] = fig_div 
-    
+    context['users'] = users
     return context
 
 def chart_user(request):
@@ -260,10 +262,11 @@ def chart_user(request):
     return render(request, 'main/chart_user.html',context)
     
 def index(request):
-   
+    
+    
     # ----chart start-------22/12/29               
     df = chart()              
-           
+         
     return render(request, 'main/index.html',df)
     
 # 회원가입 html
@@ -273,12 +276,11 @@ def signup(request):
 
 def join(request):
     
-
-# 회원가입 start/ signup.html
-    
+# 회원가입 start/ signup.html 
     name = request.POST['signupName'] # signup.html <input name=signupName> 사용을 위해
     email = request.POST['signupEmail'] # signup.html <input name=signupEmail> 사용을 위해
     pw = request.POST['signupPW'] # signup.html <input name=signupPW> 사용을 위해
+    pw_check = request.POST['signupPWcheck']
     encoded_pw = pw.encode() # 1/26 db테이블에 패스워드를 암호화 하여 저장하도록 함.
     encrypted_pw = hashlib.sha256(encoded_pw).hexdigest()
     gender= request.POST['gender'] # signup.html <input name=gender> 사용을 위해
@@ -298,14 +300,17 @@ def join(request):
     month = request.POST.get('month', False) # signup.html <input name=month> 사용을 위해
     day = request.POST.get('day', False) # signup.html <input name=day> 사용을 위해
     
-    user = User(year=year,month=month, day=day, age=real_age, gender= gender ,user_name = name, user_email = email, user_password = encrypted_pw)
-    user.save()
+    if pw != pw_check:
+        return HttpResponse("<script>alert('비밀번호가 다릅니다.');location.href='/signup' </script>")
+    elif User.objects.filter(user_email = email).exists():
+        return HttpResponse("<script>alert('이메일이 중복됩니다.');location.href='/signup'</script>")
+    else:
+        user = User(year=year,month=month, day=day, age=real_age, gender= gender ,user_name = name, user_email = email, user_password = encrypted_pw)
+        user.save()
  # 회원가입 end
-
 # ----chart start-------22/12/29
-    df = chart()   
-    
-    return render(request, 'main/index.html',df )
+        df = chart()    
+        return render(request, 'main/index.html',df )
     
     # code = randint(1000, 9999)
     # response = redirect('main_verifyCode')
@@ -320,7 +325,7 @@ def join(request):
         
     #     return HttpResponse("이메일 발송에 실패했습니다.")
 def signin(request): #로그인페이지
-    
+   
 
     return render(request, 'main/signin.html')  
     
@@ -427,10 +432,10 @@ def posting(request):
       new_name.save()
 
      #페이지당 10개씩 보여주기  최근순 
-    page = request.GET.get('page','1')
+    page = request.GET.get('page','1') # /?page=1 처럼 GET 방식으로 호출된 URL에서 page값을 가져올때 ,, page값이 없는 상태로 호출되면 디폴트 1
     items =Item.objects.order_by('-pk')
-    paginator = Paginator(items,10)
-    page_obj = paginator.get_page(page)
+    paginator = Paginator(items,10) #10개씩 보여주기
+    page_obj = paginator.get_page(page) #paginator을 이용하여 요청된 페이지에 해당하는 페이징 객체(page_obj)를 생성->이를통해 데이터전체가 아닌 해당 페이지의 데이터만 조회하도록 쿼리를 변경
     context={'items': page_obj}
     # context={'item_list': items}     
         
@@ -536,7 +541,7 @@ def user_remove(request):
 
 def user_remove2(request):
     
-   
+    
     user = User.objects.get(user_name=request.session['user_name'])
     user.delete()
 

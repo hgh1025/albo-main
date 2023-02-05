@@ -154,13 +154,15 @@ body{
     {% endif %}
   
     {% for page_number in items.paginator.page_range %}
-    {% if page_number >= items.number|add:-5 and page_number <= items.number|add:5%}
-  
+    {% if page_number >= items.number|add:-5 and page_number <= items.number|add:5 %}  <!-- 현재 페이지 기준으로 좌우 5개씩 페이지를 보이게 한다 -->
     {% if page_number == items.number %}
     <li id="on" aria-current="page">
       <a class="page-link" href="?page={{ page_number }}" >{{ page_number }}</a>
     </li>
-
+    {% else %}
+    <li class="page-item"> <!--페이지 넘버 1,2,3... -->
+      <a class="page-link" href="?page={{ page_number }}" >{{ page_number }}</a>
+    </li>
     {% endif %}
     {% endif %}
     {% endfor %}
