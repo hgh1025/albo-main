@@ -32,5 +32,6 @@ urlpatterns = [
     path('user_remove2', views.user_remove2, name='user_remove2'),
     path('uppass', views.uppass, name='main_uppass'),
     path('chart_user', views.chart_user, name='main_chart_user'),
+    
 ] 
 

@@ -12,7 +12,6 @@ from django.contrib.auth import authenticate # 로그인 인증 사용하기 위
 from google.protobuf import descriptor as _descriptor
 import math
 from PIL import Image
-
 import os,glob
 import tensorflow as tf
 from tensorflow import keras
@@ -22,12 +21,10 @@ from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 import numpy as np
 import pandas as pd
 from plotly.offline import plot
-
 import plotly.graph_objects as go
 import matplotlib.pylab as plt
-
 from django.core.files.uploadedfile import InMemoryUploadedFile
-
+from hashlib import sha256 as SHA #해쉬함수 무결성 검증을 위해 
 import hashlib #비밀번호 보완처리
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator #페이징 처리 
@@ -35,231 +32,120 @@ from django.core.paginator import Paginator #페이징 처리
 
 # 22/12/29 chart 함수 만들어서 다른 함수에 적용
 def chart():
-    items = Item.objects.all().order_by('-pk') 
+    global get_counts
+    # Item table에서 value값만 추출
+    df_item = pd.DataFrame(list(Item.objects.all().values())) 
+
+    # 가격 별로 item 추출
+    df_item_1 = df_item[(df_item['item_price'] >= 100000) & (df_item['item_price'] < 450000)]
+    df_item_2 = df_item[(df_item['item_price'] >= 450000) & (df_item['item_price'] < 800000)]
+    df_item_3 = df_item[(df_item['item_price'] >= 800000) & (df_item['item_price'] < 1600000)]
+
+    # 각 가격대 별 item 개수
+    values = [len(df_item_1), len(df_item_2), len(df_item_3)] 
+
+    # pie chart
+    fig = go.Pie(labels=['10만원~45만원', '45만원~80만원', '80만원~160만원'], 
+                 values=values, 
+                 hoverinfo='percent+label', 
+                 insidetextorientation='radial', 
+                 hole=.3) 
+
+    # pie chart layout
+    layout_pie = {
+        'title': '지금 이만큼이나 거래 중이에요 :0',
+        'height': 480,
+        'width': 1270,
+    }
     
-    df_item = pd.DataFrame(list(Item.objects.all().values())) # Item table에서 value값만 추출
-    filt_1 = ((df_item['item_price'] >= 100000) & (df_item['item_price'] < 450000)) #그 중에 item_price 열만 가격별로 추출
-    filt_2 = ((df_item['item_price'] >= 450000) & (df_item['item_price'] < 800000))
-    filt_3 = ((df_item['item_price'] >= 800000) & (df_item['item_price'] < 1600000))
-    df_item_1 = df_item[filt_1]
-    df_item_2 = df_item[filt_2]
-    df_item_3 = df_item[filt_3]
-
-    labels = ['10만원~45만원', '45만원~80만원', '80만원~160만원']
-    values = [len(df_item_1['item_price']), len(df_item_2['item_price']),len(df_item_3['item_price'])] #거래량을 알기위해 len함수 이용
-
-
-# insidetextorientation : Pie의 원 그래프 내 범례의 Text 회전
-    fig = go.Pie(labels=labels, values=values, hoverinfo='percent+label', insidetextorientation='radial', hole=.3) #hoverinfo : 마우스를 올리면 정보를 보여줌
-
-    graphs2 = []
-    graphs2.append(fig)
-
-    layout_pie = {'title': '지금 이만큼이나 거래 중이에요 :0',
-                    'height': 480,
-                    'width': 1270,}
-                    
-    fig_div = plot({'data':graphs2, 'layout' : layout_pie}, output_type='div')
-    
-
-    df_trade = pd.DataFrame(list(Trade.objects.all().values()))
-   
-    Filt_1 = ((df_trade['item_price'] >= 100000) & (df_trade['item_price'] < 450000))
-    Filt_2 = ((df_trade['item_price'] >= 450000) & (df_trade['item_price'] < 800000))
-    Filt_3 = ((df_trade['item_price'] >= 800000) & (df_trade['item_price'] < 1600000))
-    df_trade_1 = df_trade[Filt_1]
-    df_trade_2 = df_trade[Filt_2]
-    df_trade_3 = df_trade[Filt_3]
-    x1 = df_trade_1['item_date']
-    x2 = df_trade_2['item_date']
-    x3 = df_trade_3['item_date']
-
-    def get_counts(seq):
-        counts={}
-        for x in seq:
-            if x in counts:
-                counts[x] += 1
-            else : 
-                counts[x] = 1
-        return counts
-
-    count_1 = get_counts(x1)
-    count_2 = get_counts(x2)
-    count_3 = get_counts(x3)
-
-    x1 = list(count_1.keys())
-    x2 = list(count_2.keys())
-    x3 = list(count_3.keys())
-    y1 = []
-    y2 = []
-    y3 = []
-
-    for i in list(count_1.keys()):
-        y1.append(count_1[i])
-    for i in list(count_2.keys()):
-        y2.append(count_2[i])  
-    for i in list(count_3.keys()):
-        y3.append(count_3[i])      
-
+    # bar chart
     graphs1 = []
-    graphs1.append(go.Bar(x=x1, y=y1, name="10만원~45만원",))
-    graphs1.append(go.Bar(x=x2, y=y2, name="45만원~80만원",))
-    graphs1.append(go.Bar(x=x3, y=y3, name="80만원~160만원",))
-   
-    
+    for filt, name in [((100000, 450000), "10만원~45만원"),
+                       ((450000, 800000), "45만원~80만원"),
+                       ((800000, 1600000), "80만원~160만원")]:
+        df_trade = pd.DataFrame(list(Trade.objects.filter(item_price__range=filt).values()))
+        count = get_counts(df_trade['item_date'])
+        graphs1.append(go.Bar(x=list(count.keys()), y=list(count.values()), name=name))
 
+    # bar chart layout
     layout_graph = {
         'title': '최근 이만큼이나 거래됐어요! :)',
         'xaxis_title': 'Date',
         'yaxis_title': '수량 (개)',
         'height': 480,
-        'width': 1270,}
-    
-    plot_div = plot({'data': graphs1, 'layout': layout_graph}, 
-                    output_type='div')
+        'width': 1270,
+    }
+
+    # pie chart div
+    fig_div = plot({'data': [fig], 'layout': layout_pie}, output_type='div')
+
+    # bar chart div
+    plot_div = plot({'data': graphs1, 'layout': layout_graph}, output_type='div')
                     
     users = User.objects.all()
-    context = dict() 
-    context['items'] = items
-    context['plot_div'] = plot_div
-    context['fig_div'] = fig_div 
-    context['users'] = users
+    context = {
+        'items': Item.objects.all().order_by('-pk'),
+        'plot_div': plot_div,
+        'fig_div': fig_div,
+        'users': users,
+    }
     return context
 
+from collections import Counter #collections.counter 동일한 요소 개수 구하기
+
+def get_counts(seq):
+    return dict(Counter(seq)) 
+    
+# def get_counts(seq):
+#         counts={}
+#         for x in seq:
+#             if x in counts:
+#                 counts[x] += 1
+#             else : 
+#                 counts[x] = 1
+#         return counts    
+    
+# def get_counts(seq):
+#     counts={}
+#     for x in seq:
+#         counts[x] = counts.get(x, 0) + 1
+#     return counts
+    
+# def get_counts(seq):
+#     counts = {x: seq.count(x) for x in seq}  # x:seq.count(x) --> {10:1 , 20:2 , 30:8 ....}
+#     return counts    --> multiIndex error
+    
+
+    
 def chart_user(request):
-    users = User.objects.all()
-    
     df_user = pd.DataFrame(list(User.objects.all().values()))
-    filt_1 = (df_user['gender'] == '남자')
-    filt_2 =(df_user['gender'] == '여자')
-    df_male = df_user[filt_1]
-    df_female = df_user[filt_2]
-    
-    labels = ['남자', '여자']
-    values = [len(df_male['gender']),len(df_female['gender'])]
-    
-    fig = go.Pie(labels=labels, values=values,hoverinfo='percent+label', insidetextorientation='radial', hole=.3)
-    
-    graph = []
-    graph.append(fig)
-    
-    layout_pie = {'title':'가입한 성별',
-                    'height': 480,
-                     'width':1260,}
-    
-    fig_div = plot({'data':graph, 'layout' : layout_pie}, output_type='div') #파이그래프
-    
-    df_user = pd.DataFrame(list(User.objects.all().values()))
-    Filt_1 = ((df_user['age'] >= 10) & (df_user['age'] < 20)) # True , False 
-    Filt_2 = ((df_user['age'] >= 20) & (df_user['age'] < 30))
-    Filt_3 = ((df_user['age'] >= 30) & (df_user['age'] < 40))
-    Filt_4 = ((df_user['age'] >= 40) & (df_user['age'] < 50))
-    Filt_5 = ((df_user['age'] >= 50) & (df_user['age'] < 60))
-    Filt_6 = ((df_user['age'] >= 60) & (df_user['age'] < 70))
-    Filt_7 = ((df_user['age'] >= 70) & (df_user['age'] < 80))
-    
-    df_user_1 = df_user[Filt_1] #user 정보 가져오기
-    df_user_2 = df_user[Filt_2]
-    df_user_3 = df_user[Filt_3]
-    df_user_4 = df_user[Filt_4]
-    df_user_5 = df_user[Filt_5]
-    df_user_6 = df_user[Filt_6]
-    df_user_7 = df_user[Filt_7]
- 
-    def x_20(x): #나이대 구하기
-        if 10<= x <20:
-            return 10
-        elif 20<= x <30:
-            return 20
-        elif 30<= x <40:
-            return 30
-        elif 40<= x < 50:
-            return 40
-        elif 50<= x <60:
-            return 50
-        elif 60<= x <70:
-            return 60   
-        elif 70<= x <80:
-            return 70    
-    x1 = df_user_1['age'].apply(x_20)   
-    x2 = df_user_2['age'].apply(x_20)
-    x3 = df_user_3['age'].apply(x_20) 
-    x4 = df_user_4['age'].apply(x_20) 
-    x5 = df_user_5['age'].apply(x_20) 
-    x6 = df_user_6['age'].apply(x_20)
-    x7 = df_user_7['age'].apply(x_20)
-    
-    def get_counts(seq):
-        counts={}
-        for x in seq:
-            if x in counts:
-                counts[x] += 1
-            else : 
-                counts[x] = 1
-        return counts
 
-    count_1 = get_counts(x1)
-    count_2 = get_counts(x2)
-    count_3 = get_counts(x3)
-    count_4 = get_counts(x4)
-    count_5 = get_counts(x5)
-    count_6 = get_counts(x6)
-    count_7 = get_counts(x7)
-    
-    x1 = list(count_1.keys())
-    x2 = list(count_2.keys())
-    x3 = list(count_3.keys())
-    x4 = list(count_4.keys())
-    x5 = list(count_5.keys())
-    x6 = list(count_6.keys())
-    x7 = list(count_7.keys())
-    y1 = []
-    y2 = []
-    y3 = []
-    y4 = []
-    y5 = []
-    y6 = []
-    y7 = []
-    
-    for i in list(count_1.keys()):
-        y1.append(count_1[i])
-    for i in list(count_2.keys()):
-        y2.append(count_2[i])  
-    for i in list(count_3.keys()):
-        y3.append(count_3[i])
-    for i in list(count_4.keys()):
-        y4.append(count_4[i]) 
-    for i in list(count_5.keys()):
-        y5.append(count_5[i]) 
-    for i in list(count_6.keys()):
-        y6.append(count_6[i])
-    for i in list(count_7.keys()):
-        y7.append(count_7[i])
-    graphs1 = []
-    graphs1.append(go.Bar(x=x1, y=y1, name="10세~19세",))
-    graphs1.append(go.Bar(x=x2, y=y2, name="20세~29세",))
-    graphs1.append(go.Bar(x=x3, y=y3, name="30세~39세",))
-    graphs1.append(go.Bar(x=x4, y=y4, name="40세~49세",))
-    graphs1.append(go.Bar(x=x5, y=y5, name="50세~59세",))
-    graphs1.append(go.Bar(x=x6, y=y6, name="60세~69세",))
-    graphs1.append(go.Bar(x=x7, y=y7, name="70세~79세",))
-    
-    layout_graph = {
-        'title': '가입자 나이대별 그래프',
-        'xaxis_title': '나이(대)',
-        'yaxis_title': '가입자 수',
-        'height': 480,
-        'width': 1270,}
+    # Pie chart
+    df_gender = df_user.groupby('gender').size()
+    fig_gender = go.Pie(labels=df_gender.index, values=df_gender.values, hoverinfo='percent+label', insidetextorientation='radial', hole=.3)
+    fig_gender_layout = {'title': '가입한 성별', 'height': 480, 'width': 1260}
+    fig_gender_div = plot({'data': [fig_gender], 'layout': fig_gender_layout}, output_type='div')
 
-    plot_div = plot({'data': graphs1, 'layout': layout_graph}, 
-                    output_type='div') #막대그래프
+    # Bar chart
+    age = df_user['age']
+    x_age = age.apply(lambda x: (x // 10) * 10).value_counts().sort_index().index.tolist() #apply는 Series와 DataFrame에서 lambda 함수를 쓸 수 있는 메쏘드라고 볼 수 있습니다.
+    y_age = age.apply(lambda x: (x // 10) * 10).value_counts().sort_index().tolist()
+    print(x_age)
+    print(y_age)
+    fig_age = go.Bar(x=x_age, y=y_age, name='age')
+    fig_age_layout = {'title': '가입자 나이대별 그래프', 'xaxis_title': '나이(대)', 'yaxis_title': '가입자 수', 'height': 480, 'width': 1270}
+    fig_age_div = plot({'data': [fig_age], 'layout': fig_age_layout}, output_type='div')
+    
     
     context = dict()
-    context['fig_div'] = fig_div
-    context['plot_div'] = plot_div
-    context['users'] = users
+    context['fig_gender_div'] = fig_gender_div
+    context['fig_age_div'] = fig_age_div
+    context['users'] = User.objects.all()
     
-    return render(request, 'main/chart_user.html',context)
+    return render(request, 'main/chart_user.html', context)
+    
+    
+    
     
 def index(request):
     
@@ -275,42 +161,30 @@ def signup(request):
 
 
 def join(request):
-    
-# 회원가입 start/ signup.html 
-    name = request.POST['signupName'] # signup.html <input name=signupName> 사용을 위해
-    email = request.POST['signupEmail'] # signup.html <input name=signupEmail> 사용을 위해
-    pw = request.POST['signupPW'] # signup.html <input name=signupPW> 사용을 위해
-    pw_check = request.POST['signupPWcheck']
-    encoded_pw = pw.encode() # 1/26 db테이블에 패스워드를 암호화 하여 저장하도록 함.
-    encrypted_pw = hashlib.sha256(encoded_pw).hexdigest()
-    gender= request.POST['gender'] # signup.html <input name=gender> 사용을 위해
-    
-    #year()로 하면 'int' object is not callable 에라가 나옴. 
-    # 이유->예약어year(),sum()등등으로 변수명으로 했기때문에
-    
-    now=int(datetime.now().year)
-    age= request.POST['year']
-    age1= int(age)
-   
-    # 만 나이 구하기
-    real_age = now - age1 + 1
-
-    #생년,월,일 
-    year = request.POST.get('year') # signup.html <input name=year> 사용을 위해
-    month = request.POST.get('month', False) # signup.html <input name=month> 사용을 위해
-    day = request.POST.get('day', False) # signup.html <input name=day> 사용을 위해
-    
-    if pw != pw_check:
-        return HttpResponse("<script>alert('비밀번호가 다릅니다.');location.href='/signup' </script>")
-    elif User.objects.filter(user_email = email).exists():
-        return HttpResponse("<script>alert('이메일이 중복됩니다.');location.href='/signup'</script>")
-    else:
-        user = User(year=year,month=month, day=day, age=real_age, gender= gender ,user_name = name, user_email = email, user_password = encrypted_pw)
+    if request.method == 'POST':
+        name = request.POST.get('signupName')
+        email = request.POST.get('signupEmail')
+        pw = request.POST.get('signupPW')
+        pw_check = request.POST.get('signupPWcheck')
+        gender = request.POST.get('gender')
+        year = request.POST.get('year')
+        month = request.POST.get('month')
+        day = request.POST.get('day')
+        
+        if pw != pw_check:
+            return HttpResponse("<script>alert('비밀번호가 다릅니다.');location.href='/signup'</script>")
+        elif User.objects.filter(user_email=email).exists():
+            return HttpResponse("<script>alert('이메일이 중복됩니다.');location.href='/signup'</script>")
+        
+        encoded_pw = hashlib.sha256(pw.encode()).hexdigest()
+        now = datetime.now().year
+        age = now - int(year) + 1
+        
+        user = User(year=year, month=month, day=day, age=age, gender=gender, user_name=name, user_email=email, user_password=encoded_pw)
         user.save()
- # 회원가입 end
-# ----chart start-------22/12/29
+        
         df = chart()    
-        return render(request, 'main/index.html',df )
+        return render(request, 'main/index.html', df)
     
     # code = randint(1000, 9999)
     # response = redirect('main_verifyCode')
@@ -345,7 +219,7 @@ def login(request):
             request.session['user_email'] = user.user_email
             
             return redirect('main_index')
-            
+            # return HttpResponse("<script>alert('로그인성공'); location.href='/'</script>")
         elif user.user_password != loginPW:
             return HttpResponse("<script>alert('비밀번호가 다릅니다..'); location.href='/signin'</script>")
             
@@ -449,7 +323,7 @@ def desc(request):
       page = request.GET.get('page','1')
       items =Item.objects.all().order_by('item_price')
       paginator = Paginator(items,10)
-      page_obj = paginator.get_page(page)
+      page_obj = paginator.get_page(page) # 현재 페이지에 해당하는 게시물만 얻는다.
       context={'items': page_obj}    
          
       return render(request, 'main/desc.html',context) 
@@ -460,7 +334,7 @@ def asc(request):
       page = request.GET.get('page','1')
       items =Item.objects.order_by('-item_price')
       paginator = Paginator(items,10)
-      page_obj = paginator.get_page(page)
+      page_obj = paginator.get_page(page) # 현재 페이지에 해당하는 게시물만 얻는다.
       context={'items': page_obj}
       
          
@@ -668,3 +542,38 @@ def uppass(request):
         u.save()
         return redirect("main_login")
     return render(request, 'main/uppass.html')
+    
+    
+    
+SIZE = 1024*256     # 256KB 크기만큼 파일을 읽음
+UPLOAD_DIR1 = r'C:\practice\adminpractice\albo-main\ExcelCalculate\main\static\hash/' 
+def getFileHash(filename):
+    sha = SHA()
+    h = open("%s%s" % (UPLOAD_DIR1, filename), 'rb')
+    content = h.read(SIZE)
+    while content:
+        sha.update(content)         # 256KB 만큼 정보를 읽고, 해시 값을 업데이트 함  
+        content = h.read(SIZE)      # 파일에서 그 다음 256KB를 읽음
+    h.close()
+
+    hashval = sha.digest()          # 최종 해시값 계산
+    return hashval 
+
+def hashCheck(file1, file2):
+    hashval_1 = getFileHash(file1)
+    hashval_2 = getFileHash(file2)
+
+    if hashval_1 == hashval_2:
+        print("Two Files Are Same")
+    else:
+        print("Two Files Are Different")
+
+if __name__ == '__main__':
+
+    file1 = 'plain.txt'
+    file2 = 'plain_modify.txt'
+
+    hashCheck(file1, file2)
+    
+
+    
