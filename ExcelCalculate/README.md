@@ -1,7 +1,7 @@
 # **albo-market-server**
 
 ##WIKI
-해당 프로젝트의 모든 정보는 WIKI를 통해 참고하실 수 있습니다.
+해당 프로젝트의 모든 정보는 WIKI(https://github.com/hgh1025/albo-main/wiki)를 통해 참고하실 수 있습니다.
 
 ## **목적**
 
