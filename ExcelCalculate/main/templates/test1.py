@@ -1,26 +1,39 @@
-import test
-class House:
-  def __init__(self, location, house, deal, price, year):
-    self.location = location
-    self.house = house
-    self.deal = deal
-    self.price = price
-    self.year = year
-  def show_detail(self):
-    print(self.location, self.deal,self.house,self.price,self.year)
-    
+from collections import deque
+n,m = map(int, input().split())
 
-houses = []
-house1 = House("강남","아파트", "매매","10억", "2010년")
-house2 = House("마포","오피스텔","전세","65억","2007년")
-house3 = House("송파","빌라","월세","500/50","2000년")
+map = [list(map(int, input())) for _ in range(n)]
 
-houses.append(house1)
-houses.append(house2)
-houses.append(house3)
+#bfs
+cnt = 0
 
-print("총{0}대의 매물이 있습니다.".format(len(houses)))
-for house in houses:
-  house.show_detail()
+
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
+def bfs(x,y):
+  q = deque()
+  q.append((x,y)) # 노드 삽입
+
+  while q:
+    x,y = q.popleft() # 한번 방문한 노드 삭제
+    for i in range(4):
+      nx = x + dx[i]
+      ny = y + dy[i]
+
+      if nx <0 or ny <0 or nx >=n or ny >=m:
+        return False
+
+      if map[nx][ny] == 0: #위치의 숫자가 0이면 이동 불가
+        return False
+
+      if map[nx][ny] == 1:
+        map[nx][ny] = map[nx][ny] +1 #위치의 숫자가 1이면 한칸이동
+        q.append((nx,ny))
+        return True
   
-  
+
+for i in range(n):
+  for j in range(m):
+    if bfs(i,j) == True:
+      cnt += 1
+      
+print(cnt)

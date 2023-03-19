@@ -32,7 +32,7 @@ from django.core.paginator import Paginator #페이징 처리
 
 # 22/12/29 chart 함수 만들어서 다른 함수에 적용
 def chart():
-    global get_counts
+    # global get_counts
     # Item table에서 value값만 추출
     df_item = pd.DataFrame(list(Item.objects.all().values())) 
 
@@ -121,7 +121,7 @@ def chart_user(request):
     df_user = pd.DataFrame(list(User.objects.all().values()))
 
     # Pie chart
-    df_gender = df_user.groupby('gender').size()
+    df_gender = df_user.groupby('gender').size() #size() 전체 원소의 갯수 ->[[1,2,3],[4,5,6]] ->6 vs len() 전체 원소(행)의 갯수 [[1,2,3],[4,5,6]] ->2
     fig_gender = go.Pie(labels=df_gender.index, values=df_gender.values, hoverinfo='percent+label', insidetextorientation='radial', hole=.3)
     fig_gender_layout = {'title': '가입한 성별', 'height': 480, 'width': 1260}
     fig_gender_div = plot({'data': [fig_gender], 'layout': fig_gender_layout}, output_type='div')
